@@ -25,7 +25,7 @@ The Data Acquition can be divided into these three steps:
 
 ### a) **Step 1: Understanding the NHL API:**
 
-![alt text](/assets/images/image.png)
+![Step 1 Screenshot]({{ site.baseurl }}/assets/images/image.png)
 
 The NHL Stats API provides play-by-play data at: https://api-web.nhle.com/v1/gamecenter/[GAME_ID]/play-by-play where the GAME_ID will encode season, game type (regular season or playoffs), and game number. We built helper code to create GAME_IDs from the 2016-2017 to the 2023-2024 season for both the regular season and play-offs.
 
@@ -37,9 +37,10 @@ We then implemented a NHLDataFetcher which handles three primary tasks:
 2.	Processing JSON into pandas DataFrame
 3.	Looping through entire seasons of NHL data to build a combined data set of regular season and playoff games.
 
-![alt text](/assets/images/image-1.png)
+![Step 2 Screenshot]({{ site.baseurl }}/assets/images/image-1.png)
 
-![alt text](/assets/images/image-2.png)
+![Step 2 Screenshot]({{ site.baseurl }}/assets/images/image-2.png)
+
 
 ### c) **Step 3: Using the developed NHL Class**
 
@@ -47,13 +48,13 @@ Once we establish this class the downloading and processing of the games is much
 
 **Extracting Data from a Single Game**
 
-![alt text](/assets/images/image-3.png)
+![Step 3 Screenshot]({{ site.baseurl }}/assets/images/image-3.png)
 
 This will print a clean DataFrame with columns like gameDate, typeDescKey, details_Xcoord, and details_ycoord, amongst other issues.
 
 **Processing Data for an Entire Season**
 
-![alt text](/assets/images/image-4.png)
+![Step 3 Screenshot]({{ site.baseurl }}/assets/images/image-4.png)
 
 This now will give us thousands of rows of data (if we did not use .head()) for the 2016 season.
 
@@ -67,29 +68,29 @@ In conclusion, when we structure our data around the NHLDataFetcher class, we de
 
 ## Interactive Debugging Tool 
 
-![alt text](/assets/images/image-5.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-5.png)
 
-![alt text](/assets/images/image-6.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-6.png)
 
-![alt text](/assets/images/image-7.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-7.png)
 
-![alt text](/assets/images/image-8.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-8.png)
 
-![alt text](/assets/images/image-9.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-9.png)
 
-![alt text](/assets/images/image-10.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-10.png)
 
 This interactive debugging tool uses ipywidgets to explore NHL play-by-play data by season, game, and event ID.  The tool then plots the event coordinates directly on a rink image. This will allow us to quickly visualize specific plays, along with metadata such as event type and timing, making it much easier to verify and debug the dataset where anomalous or irregular data occurs.
 
 ## Tidy Data 
 
-![alt text](/assets/images/image-11.png)
+![Tidy Data]({{ site.baseurl }}/assets/images/image-11.png)
 
-![alt text](/assets/images/image-12.png)
+![Tidy Data]({{ site.baseurl }}/assets/images/image-12.png)
 
-![alt text](/assets/images/image-13.png)
+![Tidy Data]({{ site.baseurl }}/assets/images/image-13.png)
 
-![alt text](/assets/images/image-14.png)
+![Tidy Data]({{ site.baseurl }}/assets/images/image-14.png)
 
 After we retrieved the 3.2 million play-by-play events for the NHL seasons between 2016 to 2024, we proceeded to consolidate these responses inside a JSON Data Frame. Within the data frame, each row represents a single event during the game. This could include details such as the game date, season, period, time, rink coordinates, shot type, and the teams involved in this said game. The resulting dataset (nhl_all_games_data.csv) provides a structured foundation for data analysis — making it much easier to visualize and model the data generated from the nhl games.
 
@@ -99,17 +100,17 @@ The three new features we could add to further enhance the data set are rebound 
 
 ## Simple Visualizations 
 
-1) ![alt text](/assets/images/image-15.png)
+1) ![Simple Visualizations]({{ site.baseurl }}/assets/images/image-15.png)
 
 After analyzing the figure above which covers shot statistics for the NHL 2021-2022 season, we can see that the most dangerous shots are the backhand and tip-in (where backhand seems to have a slightly higher shot success rate %). Both of these shot types have a shot conversion rate of around 9.5%. According to the results of the graph above, we see that the most common shot type is wrist with around 70000 shots throughout the season. We chose this particular figure as bar charts with their thickness and height are good indicators to see the number of different types of shots throughout the hockey season. Additionally, a line chart was selected to show the Shot Success Rate % as a line chart would easily show the trend or general difference across the different types of shots. Note that these results make intuitive sense as wrist shots due to their ease and speed are the most commonly occurring in a hockey game, while backhand and tip-ins are taken close to the goal so are likely more dangerous to take.  
 
-2) ![alt text](/assets/images/image-16.png)
+2) ![Simple Visualizations]({{ site.baseurl }}/assets/images/image-16.png)
 
 The above figure shows that across the three seasons from 2018 to 2021, the closer the distance the shot is from the goal, the probability of scoring the goal is much higher. Specifically, when you are 2.5 ft away from the goal, all three seasons have a probability of scoring of more than 20%. Additionally, when you have a shot that is more than 85 ft from the goal, the probability of a goal is less than 5%. Across the three seasons, the general trend of increasing the distance from the goal leads to a lower probability of scoring a goal is the same. However, the 2019-2020 season has the highest probability of scoring when you are around 2.5ft from the goal compared to the other two seasons. As you increase the distance though, the season with the highest to lowest probability of scoring a goal changes, however, the results are always close together (within only 3 to 4% of difference). A line graph was selected to show these figures as it is easy to use a line graph to see the trend for each season's probability of scoring a goal as the distance from the goal increases.
 
 Overall, these results make intuitive sense as the farther you are away from a goal, the less likely you are to score.
 
-3) ![alt text](/assets/images/image-17.png)
+3) ![Simple Visualizations]({{ site.baseurl }}/assets/images/image-17.png)
 
 The figure above shows the goal percentage of various shot types compared to the distance from the hockey goal (ft) during the 2018-2019 season. When analyzing this data, we can observe several important trends expanded upon in more detail below.
 

@@ -1,6 +1,6 @@
 import nbformat
 
-path = "Interactive_Debugging_Tool.ipynb"
+path = "milestone1.ipynb"
 nb = nbformat.read(path, as_version=4)
 
 # Remove problematic global widget metadata if it exists

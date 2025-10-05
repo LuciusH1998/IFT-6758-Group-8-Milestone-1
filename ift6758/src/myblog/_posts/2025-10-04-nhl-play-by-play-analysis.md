@@ -74,11 +74,11 @@ In conclusion, when we structure our data around the NHLDataFetcher class, we de
 
 ![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-7.png)
 
-![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-8.png)
-
 ![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-9.png)
 
-![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-10.png)
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-19.png)
+
+![Interactive Debugging Tool]({{ site.baseurl }}/assets/images/image-18.png)
 
 This interactive debugging tool uses ipywidgets to explore NHL play-by-play data by season, game, and event ID.  The tool then plots the event coordinates directly on a rink image. This will allow us to quickly visualize specific plays, along with metadata such as event type and timing, making it much easier to verify and debug the dataset where anomalous or irregular data occurs.
 
@@ -88,9 +88,11 @@ This interactive debugging tool uses ipywidgets to explore NHL play-by-play data
 
 ![Tidy Data]({{ site.baseurl }}/assets/images/image-12.png)
 
-![Tidy Data]({{ site.baseurl }}/assets/images/image-13.png)
+![Tidy Data]({{ site.baseurl }}/assets/images/image-20.png)
 
-![Tidy Data]({{ site.baseurl }}/assets/images/image-14.png)
+![Tidy Data]({{ site.baseurl }}/assets/images/image-21.png)
+
+![Tidy Data]({{ site.baseurl }}/assets/images/image-22.png)
 
 After we retrieved the 3.2 million play-by-play events for the NHL seasons between 2016 to 2024, we proceeded to consolidate these responses inside a JSON Data Frame. Within the data frame, each row represents a single event during the game. This could include details such as the game date, season, period, time, rink coordinates, shot type, and the teams involved in this said game. The resulting dataset (nhl_all_games_data.csv) provides a structured foundation for data analysis — making it much easier to visualize and model the data generated from the nhl games.
 

@@ -11,9 +11,11 @@ description: "Exploring NHL play-by-play data between 2016–2024 using Python"
 # -----------------------------
 # Local:  http://127.0.0.1:4000/IFT-6758-Group-8-Milestone-1
 # GitHub: https://lucius1998.github.io/IFT-6758-Group-8-Milestone-1
+# url: "https://lucius1998.github.io"
+# baseurl: "/IFT-6758-Group-8-Milestone-1"
 
-url: "https://lucius1998.github.io"        # <-- GitHub Pages base domain
-baseurl: "/IFT-6758-Group-8-Milestone-1"   # <-- repository name (no trailing slash)
+url: "http://127.0.0.1:4000"        # <-- GitHub Pages base domain
+baseurl: ""   # <-- repository name (no trailing slash)
 
 twitter_username: jekyllrb
 github_username: lucius1998

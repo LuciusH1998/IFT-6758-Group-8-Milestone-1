@@ -82,6 +82,7 @@ In conclusion, when we structure our data around the NHLDataFetcher class, we de
 
 This interactive debugging tool uses ipywidgets to explore NHL play-by-play data by season, game, and event ID.  The tool then plots the event coordinates directly on a rink image. This will allow us to quickly visualize specific plays, along with metadata such as event type and timing, making it much easier to verify and debug the dataset where anomalous or irregular data occurs.
 
+The dropdown menus and sliders automatically update based on available data, enabling smooth navigation through games and events for both the regular season and playoffs. This helped validate data correctness (e.g., shot coordinates) and served as a useful prototype for debugging and data exploration.
 ## Tidy Data 
 
 ![Tidy Data]({{ site.baseurl }}/assets/images/image-11.png)

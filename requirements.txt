@@ -1,13 +1,25 @@
+# Core scientific stack
 numpy
 pandas
 matplotlib
 seaborn
 requests
+datetime
+json
+os
+
+# Visualization and analysis
+plotly
 opencv-python
 tqdm
 lxml
-plotly
-ipywidgets
+
+# Interactive widgets
+ipywidgets>=8.1.0
+jupyterlab-widgets>=3.0.0
 ipykernel
+notebook>=7.0.0
 jupyterlab>=3.0.0
+
+# Utilities
 setuptools

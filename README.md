@@ -29,14 +29,11 @@ Each folder serves a specific purpose:
 
 - **`notebooks/`**: Optional folder for scratch or exploratory notebooks  
 
-- **`README.md`**: This file
+- **`README.md`** — This file
 - **`environments.yml`**
 - **`gitignore.txt**
 - **`requirements.txt**
 
-
-
-- **README.md** — This file  
 
 ## Installation
 

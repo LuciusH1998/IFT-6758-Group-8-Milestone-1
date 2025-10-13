@@ -45,3 +45,10 @@ cd <YOUR_REPOSITORY_FOLDER>
 
 unzip milestone1.zip
 mv milestone1.ipynb src/
+
+### 3. Create Active Virtual Environment
+We will use venv for simplicity, from inside the src directory 
+python -m venv venv
+source venv/bin/activate     # On macOS/Linux
+venv\Scripts\activate        # On Windows
+

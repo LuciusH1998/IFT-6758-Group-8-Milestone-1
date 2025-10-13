@@ -62,15 +62,16 @@ We’ll use venv for simplicity. From inside the src directory:
 
 ## Install Dependencies
 
- pip install -r requirements.txt
- 
+    pip install -r requirements.txt
+    
 This will install all Python dependencies required for the notebook and analysis.
 
 ### Run the milestone notebook
 
 Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 
-jupyter lab
+    jupyter lab
+   
 
 Then execute all cells to reproduce the results and visualizations.
 
@@ -78,8 +79,8 @@ Then execute all cells to reproduce the results and visualizations.
 
 To preview the project blog locally, navigate to the blog folder and start the Jekyll server:
 
-cd myblog
-bundle exec jekyll serve
+    cd myblog
+    bundle exec jekyll serve
 
 Once it starts, open your browser and go to:
 

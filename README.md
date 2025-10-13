@@ -17,6 +17,23 @@ Note that the rink is 200 feet long and 85 feet wide, with the goal line 11 feet
 
 The image can be found in [`./figures/nhl_rink.png`](./figures/nhl_rink.png).
 
+**Directory overview:**
+
+- **src/**
+  - `milestone1.ipynb` — Main analysis notebook  
+  - `nhl_all_games_data.csv` — Dataset used for analysis  
+  - `rink.png` — NHL rink image for visualizations  
+  - `requirements.txt` — Python dependencies  
+
+- **myblog/**
+  - `_posts/` — Blog posts (Markdown)  
+  - `assets/images/` — Blog images  
+  - `_config.yml` — Jekyll site configuration  
+  - `index.markdown` — Blog homepage  
+  - `Gemfile`, `Gemfile.lock` — Ruby dependencies for Jekyll  
+
+- **README.md** — This file  
+
 ## Installation
 
 To install this package, first setup your Python environment by following the instructions in the [Environment](#environments) section.

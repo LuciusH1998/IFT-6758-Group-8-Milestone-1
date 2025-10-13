@@ -18,13 +18,22 @@ Note that the rink is 200 feet long and 85 feet wide, with the goal line 11 feet
 The image can be found in [`./figures/nhl_rink.png`](./figures/nhl_rink.png).
 
 **Directory overview:**
-Each subfolder serves a specific purpose:
-- **`src/`**: Core working directory for scripts, notebooks, and blog content  
-- **`myblog/`**: Contains `_posts/`, configuration files, and assets for Jekyll site  
+Each folder serves a specific purpose:
+
+- **`ift6758/`**: Main package directory containing source files, notebooks, and blog content  
+  - **`src/`**: Core working directory for scripts, data, and Jupyter notebooks  
+  - **`myblog/`**: Contains `_posts/`, configuration files, and assets for the Jekyll site  
+  - **`_site/`**: Automatically generated output folder created by the Jekyll build process  
+
 - **`figures/`**: Stores figures and static images for reports or README use  
-- **`notebooks/`**: Optional scratch or exploratory notebooks  
-- **`ift6758/`**: Python package folder (contains reusable code components)  
-- **`_site/`**: Automatically generated output from the Jekyll build process  
+
+- **`notebooks/`**: Optional folder for scratch or exploratory notebooks  
+
+- **`README.md`**: This file
+- **`environments.yml`**
+- **`gitignore.txt**
+- **`requirements.txt**
+
 
 
 - **README.md** — This file  

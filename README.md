@@ -73,3 +73,19 @@ Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 jupyter lab
 
 Then execute all cells to reproduce the results and visualizations.
+
+### Serve the Jekyll Blog Locally
+
+To preview the project blog locally, navigate to the blog folder and start the Jekyll server:
+
+cd myblog
+bundle exec jekyll serve
+
+Once it starts, open your browser and go to:
+
+http://127.0.0.1:4000
+
+or directly to your post:
+
+http://127.0.0.1:4000/data%20science/nhl/python/2025/10/04/nhl-play-by-play-analysis.html
+

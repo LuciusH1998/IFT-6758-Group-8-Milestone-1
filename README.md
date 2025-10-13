@@ -35,12 +35,13 @@ Each folder serves a specific purpose:
 - **`requirements.txt`**
 
 
-## Installation
+## Set up Instructions
 
-To install this package, first setup your Python environment by following the instructions in the [Environment](#environments) section.
-Once you've setup your environment, you can install this package by running the following command from the root directory of your repository. 
+Follow these steps to reproduce the environment and run both the notebook and the Jekyll blog locally. 
 
-    pip install -e .
+    git clone <YOUR_REPOSITORY_URL>
+    cd <YOUR_REPOSITORY_FOLDER>
+
 
 You should see something similar to the following output:
 

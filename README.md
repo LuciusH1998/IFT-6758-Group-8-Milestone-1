@@ -31,8 +31,8 @@ Each folder serves a specific purpose:
 
 - **`README.md`** — This file
 - **`environments.yml`**
-- **`gitignore.txt**
-- **`requirements.txt**
+- **`gitignore.txt`**
+- **`requirements.txt`**
 
 
 ## Installation

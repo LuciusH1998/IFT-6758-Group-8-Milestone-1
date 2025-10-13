@@ -18,19 +18,14 @@ Note that the rink is 200 feet long and 85 feet wide, with the goal line 11 feet
 The image can be found in [`./figures/nhl_rink.png`](./figures/nhl_rink.png).
 
 **Directory overview:**
+Each subfolder serves a specific purpose:
+- **`src/`**: Core working directory for scripts, notebooks, and blog content  
+- **`myblog/`**: Contains `_posts/`, configuration files, and assets for Jekyll site  
+- **`figures/`**: Stores figures and static images for reports or README use  
+- **`notebooks/`**: Optional scratch or exploratory notebooks  
+- **`ift6758/`**: Python package folder (contains reusable code components)  
+- **`_site/`**: Automatically generated output from the Jekyll build process  
 
-- **src/**
-  - `milestone1.ipynb` — Main analysis notebook  
-  - `nhl_all_games_data.csv` — Dataset used for analysis  
-  - `rink.png` — NHL rink image for visualizations  
-  - `requirements.txt` — Python dependencies  
-
-- **myblog/**
-  - `_posts/` — Blog posts (Markdown)  
-  - `assets/images/` — Blog images  
-  - `_config.yml` — Jekyll site configuration  
-  - `index.markdown` — Blog homepage  
-  - `Gemfile`, `Gemfile.lock` — Ruby dependencies for Jekyll  
 
 - **README.md** — This file  
 

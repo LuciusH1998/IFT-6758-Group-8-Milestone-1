@@ -47,8 +47,8 @@ Follow these steps to reproduce the environment and run both the notebook and th
 Download the source folder and all its objects into VS Code or whatever software you are using. 
 If you have received a compressed version of the milestone
 
-unzip milestone1.zip
-mv milestone1.ipynb src/
+    unzip milestone1.zip
+    mv milestone1.ipynb src/
 
 This ensures the notebook is inside the src directory where all source code and data live.
 
@@ -56,14 +56,14 @@ This ensures the notebook is inside the src directory where all source code and 
 
 We’ll use venv for simplicity. From inside the src directory:
 
-python -m venv venv
-source venv/bin/activate     # On macOS/Linux
-venv\Scripts\activate        # On Windows
+    python -m venv venv
+    source venv/bin/activate     # On macOS/Linux
+    venv\Scripts\activate        # On Windows
 
 ## Install Dependencies
 
-pip install -r requirements.txt
-
+ pip install -r requirements.txt
+ 
 This will install all Python dependencies required for the notebook and analysis.
 
 ### Run the milestone notebook
@@ -73,31 +73,3 @@ Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 jupyter lab
 
 Then execute all cells to reproduce the results and visualizations.
-
-### Pip + Virtualenv
-
-An alternative to Conda is to use pip and virtualenv to manage your environments.
-This may play less nicely with Windows, but works fine on Unix devices.
-This method makes use of the `requirements.txt` file; you can disregard the `environment.yml` file if you choose this method.
-
-Ensure you have installed the [virtualenv tool](https://virtualenv.pypa.io/en/latest/installation.html) on your system.
-Once installed, create a new virtual environment:
-
-    vitualenv ~/ift6758-venv
-    source ~/ift6758-venv/bin/activate
-
-Install the packages from a requirements.txt file:
-
-    pip install -r requirements.txt
-
-As before, register the environment so jupyter can see it:
-
-    python -m ipykernel install --user --name=ift6758-venv
-
-You should now be able to launch jupyter and see your conda environment:
-
-    jupyter-lab
-
-If you want to create a new `requirements.txt` file, you can use `pip freeze`:
-
-    pip freeze > requirements.txt

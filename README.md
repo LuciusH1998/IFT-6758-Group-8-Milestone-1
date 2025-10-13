@@ -42,15 +42,9 @@ Follow these steps to reproduce the environment and run both the notebook and th
     git clone <YOUR_REPOSITORY_URL>
     cd <YOUR_REPOSITORY_FOLDER>
 
-## Downloading Source Folder and Unzipping Files
+## Downloading Source Folder
 
 Download the source folder and all its objects into VS Code or whatever software you are using. 
-If you have received a compressed version of the milestone
-
-    unzip milestone1.zip
-    mv milestone1.ipynb src/
-
-This ensures the notebook is inside the src directory where all source code and data live.
 
 ## Create and Activate a virtual Environment
 

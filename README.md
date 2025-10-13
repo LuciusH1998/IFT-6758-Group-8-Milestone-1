@@ -42,52 +42,37 @@ Follow these steps to reproduce the environment and run both the notebook and th
     git clone <YOUR_REPOSITORY_URL>
     cd <YOUR_REPOSITORY_FOLDER>
 
+## Downloading Source Folder and Unzipping Files
 
-You should see something similar to the following output:
+Download the source folder and all its objects into VS Code or whatever software you are using. 
+If you have received a compressed version of the milestone
 
-    > pip install -e .
-    Obtaining file:///home/USER/project-template
-    Installing collected packages: ift6758
-    Running setup.py develop for ift6758
-    Successfully installed ift6758-0.1.0
+unzip milestone1.zip
+mv milestone1.ipynb src/
 
+This ensures the notebook is inside the src directory where all source code and data live.
 
-## Environments
+## Create and Activate a virtual Environment
 
-The first thing you should setup is your isolated Python environment.
-You can manage your environments through either Conda or pip.
-Both ways are valid, just make sure you understand the method you choose for your system.
-It's best if everyone on your team agrees on the same method, or you will have to maintain both environment files!
-Instructions are provided for both methods.
+We’ll use venv for simplicity. From inside the src directory:
 
-**Note**: If you are having trouble rendering interactive plotly figures and you're using the pip + virtualenv method, try using Conda instead.
+python -m venv venv
+source venv/bin/activate     # On macOS/Linux
+venv\Scripts\activate        # On Windows
 
-### Conda 
+## Install Dependencies
 
-Conda uses the provided `environment.yml` file.
-You can ignore `requirements.txt` if you choose this method.
-Make sure you have [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/products/individual) installed on your system.
-Once installed, open up your terminal (or Anaconda prompt if you're on Windows).
-Install the environment from the specified environment file:
+pip install -r requirements.txt
 
-    conda env create --file environment.yml
-    conda activate ift6758-conda-env
+This will install all Python dependencies required for the notebook and analysis.
 
-After you install, register the environment so jupyter can see it:
+### Run the milestone notebook
 
-    python -m ipykernel install --user --name=ift6758-conda-env
+Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 
-You should now be able to launch jupyter and see your conda environment:
+jupyter lab
 
-    jupyter-lab
-
-If you make updates to your conda `environment.yml`, you can use the update command to update your existing environment rather than creating a new one:
-
-    conda env update --file environment.yml    
-
-You can create a new environment file using the `create` command:
-
-    conda env export > environment.yml
+Then execute all cells to reproduce the results and visualizations.
 
 ### Pip + Virtualenv
 

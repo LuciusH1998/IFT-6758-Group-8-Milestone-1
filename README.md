@@ -19,14 +19,9 @@ Each folder serves a specific purpose:
   - **`myblog/`**: Contains `_posts/`, configuration files, and assets for the Jekyll site  
   - **`_site/`**: Automatically generated output folder created by the Jekyll build process  
 
-- **`figures/`**: Stores figures and static images for reports or README use  
-
-- **`notebooks/`**: Optional folder for scratch or exploratory notebooks  
-
 - **`README.md`** — This file
 - **`environments.yml`**
 - **`gitignore.txt`**
-- **`requirements.txt`**
 
 
 ## Set up Instructions

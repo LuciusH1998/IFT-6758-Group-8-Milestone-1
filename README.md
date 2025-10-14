@@ -58,7 +58,7 @@ Launch Jupyter Lab or Notebook and open milestone1.ipynb:
    
     code .
 
-Then execute all cells to reproduce the results and visualizations.
+After making sure that the newly created virtual environment has been selected as the kernel, execute all cells to reproduce the results and visualizations.
 
 ### Serve the Jekyll Blog Locally
 

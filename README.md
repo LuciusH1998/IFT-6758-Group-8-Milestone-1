@@ -28,7 +28,7 @@ Each folder serves a specific purpose:
 
 Follow these steps to reproduce the environment and run both the notebook and the Jekyll blog locally. 
 
-    git clone <YOUR_REPOSITORY_URL>
+    git clone https://github.com/LuciusH1998/IFT-6758-Group-8-Milestone-1.git
     cd IFT-6758-Group-8-Milestone-1
     cd ift6758
     cd src

@@ -11,12 +11,6 @@ The project demonstrates key data science concepts such as:
 <img src="./figures/nhl_rink.png" alt="NHL Rink is 200ft x 85ft." width="400"/>
 <p>
 
-Also included in this repo is an image of the NHL ice rink that you can use in your plots.
-It has the correct location of lines, faceoff dots, and length/width ratio as the real NHL rink.
-Note that the rink is 200 feet long and 85 feet wide, with the goal line 11 feet from the nearest edge of the rink, and the blue line 75 feet from the nearest edge of the rink.
-
-The image can be found in [`./figures/nhl_rink.png`](./figures/nhl_rink.png).
-
 **Directory overview:**
 Each folder serves a specific purpose:
 

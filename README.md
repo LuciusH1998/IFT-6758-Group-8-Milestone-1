@@ -29,11 +29,10 @@ Each folder serves a specific purpose:
 Follow these steps to reproduce the environment and run both the notebook and the Jekyll blog locally. 
 
     git clone <YOUR_REPOSITORY_URL>
-    cd <YOUR_REPOSITORY_FOLDER>
+    cd IFT-6758-Group-8-Milestone-1
+    cd ift6758
+    cd src
 
-## Downloading Source Folder
-
-Download the source folder and all its objects into VS Code or whatever software you are using. 
 
 ## Create and Activate a virtual Environment
 
@@ -49,7 +48,7 @@ We’ll use venv for simplicity. From inside the src directory:
     
 This will install all Python dependencies required for the notebook and analysis.
 
-### Run the milestone notebook
+### Run the milestone1.ipynb notebook
 
 Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 

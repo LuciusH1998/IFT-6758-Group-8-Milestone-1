@@ -1,4 +1,4 @@
-# IFT6758 Group Repo Template
+# IFT6758 Project Milestone 1
 
 This repository contains the code and assets for the IFT6758 NHL Play-by-Play Analysis project.  
 It includes both the main analytical notebook (`milestone1.ipynb`) and a Jekyll-based blog (`myblog`) used to showcase results.

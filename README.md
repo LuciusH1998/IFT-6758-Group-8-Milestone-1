@@ -24,7 +24,7 @@ Each folder serves a specific purpose:
 - **`gitignore.txt`**
 
 
-## Set up Instructions
+## Set up Instructions (Python version == 3.13.3)
 
 Follow these steps to reproduce the environment and run both the notebook and the Jekyll blog locally. 
 
@@ -53,7 +53,10 @@ This will install all Python dependencies required for the notebook and analysis
 Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 
     jupyter lab
+    
+   or
    
+    code .
 
 Then execute all cells to reproduce the results and visualizations.
 

@@ -212,3 +212,182 @@ Tidy Data Updated Table W&B link: [View Dataset on W&B](https://wandb.ai/IFT6758
 ## Give it your best shot!
 
 ## Evaluate on test set! 
+
+Predicting goals in ice hockey is a challenging task due to the highly imbalanced nature of shot outcomes — most shots do **not result in a goal**. In this project, we explored **three models**: Neural Networks (NN), XGBoost (XGB), and Logistic Regression (LogReg) to predict whether a shot will result in a goal using NHL game data from the 2016-2021 seasons.  
+
+We trained our models on **regular season data** from 2016-2020 and tested them on the **2020-2021 season**, separately analyzing **regular season** and **playoff games**. The evaluation focused not only on traditional metrics such as accuracy, precision, recall, F1 score, and ROC-AUC, but also on **probability calibration**, **cumulative goal curves**, and **confusion matrices** to assess how well the models can rank shots according to scoring likelihood.  
+
+---
+
+### Neural Network (NN)
+
+We built a fully-connected NN with three hidden layers, batch normalization, and dropout for regularization. The model was trained using **binary cross-entropy** and class weights to handle the strong imbalance between goals and non-goals. Optimal probability thresholds were chosen to maximize F1 score.  
+
+**Visual Evaluation**  
+
+**Confusion Matrices**  
+
+![NN Regular Season Confusion Matrix]({{ site.baseurl }}/assets/images/regular_season_confusion.png)  
+![NN Playoffs Confusion Matrix]({{ site.baseurl }}/assets/images/playoffs_confusion.png)  
+
+**ROC Curves**  
+
+![NN Regular Season ROC]({{ site.baseurl }}/assets/images/regular_season_roc.png)  
+![NN Playoffs ROC]({{ site.baseurl }}/assets/images/playoffs_roc.png)  
+
+**Calibration Curves**  
+
+![NN Regular Season Calibration]({{ site.baseurl }}/assets/images/regular_season_calibration.png)  
+![NN Playoffs Calibration]({{ site.baseurl }}/assets/images/playoffs_calibration.png)  
+
+**Probability Distributions**  
+
+![NN Regular Season Probability]({{ site.baseurl }}/assets/images/regular_season_probability.png)  
+![NN Playoffs Probability]({{ site.baseurl }}/assets/images/playoffs_probability.png)  
+
+---
+
+### XGBoost (XGB)
+
+XGB is a gradient boosting ensemble method that excels with tabular data. Early stopping and class weights were used during training to prevent overfitting and to handle class imbalance.  
+
+**Visual Evaluation**  
+
+**Confusion Matrices**  
+
+![XGB Regular Season Confusion Matrix]({{ site.baseurl }}/assets/images/xgb_regular_confusion.png)  
+![XGB Playoffs Confusion Matrix]({{ site.baseurl }}/assets/images/xgb_playoffs_confusion.png)  
+
+**ROC Curves**  
+
+![XGB Regular Season ROC]({{ site.baseurl }}/assets/images/xgb_regular_roc.png)  
+![XGB Playoffs ROC]({{ site.baseurl }}/assets/images/xgb_playoffs_roc.png)  
+
+**Calibration Curves**  
+
+![XGB Regular Season Calibration]({{ site.baseurl }}/assets/images/xgb_regular_calibration.png)  
+![XGB Playoffs Calibration]({{ site.baseurl }}/assets/images/xgb_playoffs_calibration.png)  
+
+**Probability Distributions**  
+
+![XGB Regular Season Probability]({{ site.baseurl }}/assets/images/xgb_regular_probability.png)  
+![XGB Playoffs Probability]({{ site.baseurl }}/assets/images/xgb_playoffs_probability.png)  
+
+---
+
+### Logistic Regression (LogReg)
+
+Logistic Regression is a simple baseline model that provides interpretable coefficients for features. Threshold optimization was applied to maximize F1 score and probability calibration.  
+
+**Visual Evaluation**  
+
+**Confusion Matrices**  
+
+![LogReg Regular Season Confusion Matrix]({{ site.baseurl }}/assets/images/logreg_regular_confusion.png)  
+![LogReg Playoffs Confusion Matrix]({{ site.baseurl }}/assets/images/logreg_playoffs_confusion.png)  
+
+**ROC Curves**  
+
+![LogReg Regular Season ROC]({{ site.baseurl }}/assets/images/logreg_regular_roc.png)  
+![LogReg Playoffs ROC]({{ site.baseurl }}/assets/images/logreg_playoffs_roc.png)  
+
+**Calibration Curves**  
+
+![LogReg Regular Season Calibration]({{ site.baseurl }}/assets/images/logreg_regular_calibration.png)  
+![LogReg Playoffs Calibration]({{ site.baseurl }}/assets/images/logreg_playoffs_calibration.png)  
+
+**Probability Distributions**  
+
+![LogReg Regular Season Probability]({{ site.baseurl }}/assets/images/logreg_regular_prob_hist.png)  
+![LogReg Playoffs Probability]({{ site.baseurl }}/assets/images/logreg_playoffs_prob_hist.png)  
+
+---
+
+### Summary of Test Metrics
+
+The following table summarizes the main evaluation metrics for all models and datasets. It provides a quick comparison of overall performance:
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Dataset</th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1 Score</th>
+      <th>ROC-AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NN</td>
+      <td>Regular Season</td>
+      <td>0.785</td>
+      <td>0.224</td>
+      <td>0.478</td>
+      <td>0.306</td>
+      <td>0.747</td>
+    </tr>
+    <tr>
+      <td>NN</td>
+      <td>Playoffs</td>
+      <td>0.792</td>
+      <td>0.196</td>
+      <td>0.454</td>
+      <td>0.274</td>
+      <td>0.734</td>
+    </tr>
+    <tr>
+      <td>XGB</td>
+      <td>Regular Season</td>
+      <td>0.772</td>
+      <td>0.221</td>
+      <td>0.516</td>
+      <td>0.309</td>
+      <td>0.746</td>
+    </tr>
+    <tr>
+      <td>XGB</td>
+      <td>Playoffs</td>
+      <td>0.777</td>
+      <td>0.190</td>
+      <td>0.483</td>
+      <td>0.272</td>
+      <td>0.730</td>
+    </tr>
+    <tr>
+      <td>LogReg</td>
+      <td>Regular Season</td>
+      <td>0.767</td>
+      <td>0.218</td>
+      <td>0.526</td>
+      <td>0.309</td>
+      <td>0.746</td>
+    </tr>
+    <tr>
+      <td>LogReg</td>
+      <td>Playoffs</td>
+      <td>0.821</td>
+      <td>0.217</td>
+      <td>0.411</td>
+      <td>0.284</td>
+      <td>0.735</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### Insights
+
+1. **NN & XGB perform similarly**, with slightly better recall than Logistic Regression — important in imbalanced shot data.  
+2. **Playoffs are harder to predict**, likely due to lower number of shots and tighter defenses.  
+3. **Probability calibration** shows that all models tend to slightly overpredict high probability goals, especially in playoffs.  
+4. Logistic Regression provides a simple, interpretable baseline, but ensemble/tree methods are slightly better for nuanced interactions.  
+5. Using **both distance and angle features**, along with contextual and temporal information (rebound, speed, power-play indicators), allows the models to capture the underlying patterns of goal probability more effectively.  
+6. These evaluation results provide a **baseline for expected-goals (xG) models** in hockey analytics and demonstrate the value of probability-based metrics in highly imbalanced datasets.
+
+---
+
+*All images referenced in this blog are outputs generated during model evaluation and saved locally.*

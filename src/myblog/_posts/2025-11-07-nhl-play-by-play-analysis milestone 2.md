@@ -209,6 +209,116 @@ Tidy Data Updated Table W&B link: [View Dataset on W&B](https://wandb.ai/IFT6758
 
 ## Advanced Models
 
+
+In this task, we moved beyond the baseline models and implemented a **high-performance XGBoost classifier** trained on the complete feature set.  
+We aimed to optimize model performance using **GridSearchCV**, monitor experiments through **Weights & Biases (wandb)**, and evaluate calibration, reliability, and feature importance.
+
+
+
+### Model Training and Optimization
+
+The model was trained on a large dataset:
+
+- **Training shape:** (1,319,337 × 26)  
+- **Validation shape:** (329,835 × 26)
+
+A **fast grid search** was performed to tune key hyperparameters such as:
+- `colsample_bytree`: 0.8  
+- `learning_rate`: 0.05  
+- `max_depth`: 5  
+- `min_child_weight`: 1  
+- `n_estimators`: 200  
+- `subsample`: 0.8  
+
+The best configuration achieved a **CV AUC of 0.7576**.  
+Final validation metrics were:
+
+| Metric | Score |
+|:-------|:------:|
+| **Validation Accuracy** | 0.9083 |
+| **Validation AUC** | 0.7577 |
+
+
+
+### Model Complexity and Performance
+
+The first evaluation analyzed how increasing model complexity (e.g., number of estimators, depth) affects validation performance.  
+We observed diminishing returns after a certain depth, suggesting that moderate complexity provides the best generalization.
+
+![Performance vs Model Complexity]({{ site.baseurl }}/assets/images/performance_model_complexity.jpg)
+
+
+
+### Probability Calibration
+
+A key component of model evaluation is **calibration** — how well the predicted probabilities reflect true outcome frequencies.  
+The following figure compares **calibrated vs uncalibrated probabilities** using **isotonic regression**.
+
+![Calibration Plot for XGBoost]({{ site.baseurl }}/assets/images/q3_calibration.jpg)
+
+
+
+### Reliability Curve and Calibration Check
+
+We also plotted the **reliability curve** (expected vs predicted probabilities).  
+A perfectly calibrated model lies close to the diagonal; XGBoost, while slightly overconfident in some regions, remains fairly reliable.
+
+![Reliability Curve (XGBoost - Q1)]({{ site.baseurl }}/assets/images/reliability_curve_xgb_q1.jpg)
+
+
+
+### Baseline vs Tuned Model Comparison
+
+To assess the gains from tuning, we compared the **baseline XGBoost model** (default params) against the optimized one.
+
+- **Baseline AUC:** ~0.73  
+- **Optimized AUC:** ~0.7576  
+- Improved discrimination and more stable probability outputs were observed.
+
+![Baseline XGBoost (Q1)]({{ site.baseurl }}/assets/images/xgb_q1_baseline.jpg)
+![XGBoost Probability Distribution (Q1)]({{ site.baseurl }}/assets/images/xgboost_q1_probability.jpg)
+
+
+
+### ROC Comparison Across Models
+
+We further compared the ROC curves of various models — including Logistic Regression, Neural Network, and XGBoost.  
+The **XGBoost curve dominates** in the upper-left region, confirming its superior ability to separate goal vs no-goal events.
+
+![ROC Comparison]({{ site.baseurl }}/assets/images/roc_comparison.jpg)
+
+
+
+### Feature Importance
+
+Understanding which features drive predictions is essential.  
+The **Top Feature Importance** and **ANOVA-based Feature Selection** plots below highlight that **shot distance**, **shot angle**, and **rebound indicators** are consistently influential.
+
+![Top Feature Importance (XGBoost)]({{ site.baseurl }}/assets/images/top_feature_importance.jpg)
+![Top Features by ANOVA]({{ site.baseurl }}/assets/images/top_features_annova.jpg)
+
+
+### Goal Probability vs Actual Outcomes
+
+Finally, we visualized how the predicted goal probability correlates with actual outcomes across different probability bins.  
+This diagnostic shows good monotonic behavior — as predicted probability increases, the true goal rate rises proportionally.
+
+![XGBoost Goal vs Probability]({{ site.baseurl }}/assets/images/xgb_goal_vs_probability.jpg)
+
+
+
+### Summary
+
+| Step | Description 
+|:--|:--
+| **Model** | XGBoost (Tuned via GridSearchCV) 
+| **Validation Accuracy** | 0.9083 
+| **Validation AUC** | 0.7577 
+| **Key Improvements** | Calibration, Reliability, ROC Curve, and Feature Interpretability
+| **Visualization Tools** | Matplotlib, Seaborn, Weights & Biases
+
+This task demonstrates how careful hyperparameter tuning, calibration, and interpretability analysis can significantly improve model performance and reliability.
+
 ## Give it your best shot!
 
 ## Evaluate on test set! 

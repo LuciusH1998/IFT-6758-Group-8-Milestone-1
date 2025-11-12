@@ -292,7 +292,7 @@ A perfectly calibrated model lies close to the diagonal; XGBoost, while slightly
 
 To assess the gains from tuning, we compared the **baseline XGBoost model** (default params) against the optimized one.
 
-- **Baseline AUC:** ~0.73  
+- **Baseline AUC:** ~0.71  
 - **Optimized AUC:** ~0.7576  
 - Improved discrimination and more stable probability outputs were observed.
 
@@ -339,6 +339,13 @@ This diagnostic shows good monotonic behavior — as predicted probability incre
 | **Visualization Tools** | Matplotlib, Seaborn, Weights & Biases
 
 This task demonstrates how careful hyperparameter tuning, calibration, and interpretability analysis can significantly improve model performance and reliability.
+
+**XGB Boost Baseline Run Trained on Distance & Angle Only:** [XGB Boost Baseline Distance & Angle WANB Summary](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/wmf4j068)
+
+
+**XGB Boost Baseline Run Trained on All Features:** [XGB Boost All Features](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/66fc753h)
+
+**XGB Boost Baseline Run Trained on Selected Features:** [XGB Boost Selected Features](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/rs1c75w8)
 
 ## Give it your best shot!
 

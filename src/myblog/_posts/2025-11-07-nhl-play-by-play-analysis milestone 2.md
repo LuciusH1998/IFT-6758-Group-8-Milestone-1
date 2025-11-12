@@ -161,6 +161,8 @@ Overall, these diagnostics and plots demonstrate that while the distance-only lo
 
 ![Calibration Curve for Different Feature Combinations]({{ site.baseurl }}/assets/images/image-37.png)
 
+![Calibration Curve for Different Feature Combinations Brier Score]({{ site.baseurl }}/assets/images/image-38.png)
+
 **Calibration Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/brvsei5q)
 
 To test how certain geometric features contribute to scoring probability, we trained three Logistic Regression classifiers — one which only used distance, one which only used angles, and one which used distance and angles together — and compared these to a random baseline. Subsequently, the model’s outputs were evaluated with the same metrics as before: ROC curve (AUC), goal rate by percentile, and cumulative goal curve.

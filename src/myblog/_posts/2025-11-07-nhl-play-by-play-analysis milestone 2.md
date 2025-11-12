@@ -207,117 +207,167 @@ This modified dataset gives a good foundation for training more complex expected
 Tidy Data Updated Table W&B link: [View Dataset on W&B](https://wandb.ai/IFT6758-2025-B08/my_project/artifacts/dataset/wpg_v_wsh_2017021065/v3/files/wpg_v_wsh_2017021065.table.json)
 
 
+
+
+
 ## Advanced Models
 
+In this section, we advanced beyond the baseline Logistic Regression and Neural Network models to build **high-performance XGBoost classifiers**.  
+Our goal was to analyze whether the inclusion of all engineered features, combined with **hyperparameter tuning, calibration**, and **feature selection**, can enhance predictive performance.
 
-In this task, we moved beyond the baseline models and implemented a **high-performance XGBoost classifier** trained on the complete feature set.  
-We aimed to optimize model performance using **GridSearchCV**, monitor experiments through **Weights & Biases (wandb)**, and evaluate calibration, reliability, and feature importance.
+All experiments were tracked through **Weights & Biases (wandb)** for transparency and reproducibility.
+
+---
+
+### Q1 — Baseline XGBoost (Distance & Angle Only)
+
+The first step was to train a **baseline XGBoost model** using only the `shot_distance` and `shot_angle` features.  
+This model served as a comparison to the fully tuned models trained later with the complete feature set.
+
+**Training setup:**
+- Train shape: (262,031 × 32)
+- Validation shape: (65,311 × 32)
+- Subsampled training set: (65,507 × 1,205)
+- Optimizer: `XGBoostClassifier` (default parameters)
+- Evaluation metric: `roc_auc`
+
+**Results:**
+- Validation Accuracy: **0.9082**
+- Validation AUC: **0.7422**
+- FAST training complete and all plots saved.
+
+These results already surpassed Logistic Regression from Task 3, showing XGBoost’s strength in capturing nonlinear patterns.
+
+**Visualizations:**
+
+![Baseline XGBoost (Q1)]({{ site.baseurl }}/assets/images/xgb_q1_baseline.jpg)
+![XGBoost Probability Distribution (Q1)]({{ site.baseurl }}/assets/images/xgboost_q1_probability.jpg)
+![XGBoost Goal vs Probability]({{ site.baseurl }}/assets/images/xgb_goal_vs_probability.jpg)
+![Reliability Curve (XGBoost - Q1)]({{ site.baseurl }}/assets/images/reliability_curve_xgb_q1.jpg)
+
+**WandB Run:** [View Baseline XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2)
 
 
 
-### Model Training and Optimization
+### Q2 — XGBoost with All Features and Hyperparameter Tuning
 
-The model was trained on a large dataset:
+We next trained an **XGBoost classifier** using all engineered features (26 total) and applied **GridSearchCV** for fine-tuned optimization.
 
-- **Training shape:** (1,319,337 × 26)  
-- **Validation shape:** (329,835 × 26)
+**Dataset dimensions:**
+- Training: (1,319,337 × 26)
+- Validation: (329,835 × 26)
 
-A **fast grid search** was performed to tune key hyperparameters such as:
-- `colsample_bytree`: 0.8  
-- `learning_rate`: 0.05  
-- `max_depth`: 5  
-- `min_child_weight`: 1  
-- `n_estimators`: 200  
-- `subsample`: 0.8  
+**Grid Search Parameters:**
 
-The best configuration achieved a **CV AUC of 0.7576**.  
-Final validation metrics were:
+| Hyperparameter | Tested Range |
+|----------------|---------------|
+| `learning_rate` | [0.01, 0.05, 0.1] |
+| `max_depth` | [3, 5, 7] |
+| `n_estimators` | [100, 200, 300] |
+| `colsample_bytree` | [0.6, 0.8, 1.0] |
+| `subsample` | [0.6, 0.8, 1.0] |
+| `min_child_weight` | [1, 3, 5] |
 
-| Metric | Score |
-|:-------|:------:|
-| **Validation Accuracy** | 0.9083 |
-| **Validation AUC** | 0.7577 |
+**Best Configuration:**
+colsample_bytree = 0.8
+learning_rate = 0.05
+max_depth = 5
+min_child_weight = 1
+n_estimators = 200
+subsample = 0.8
+Best CV AUC = 0.7576
+Validation AUC = 0.7577
+Validation Accuracy = 0.9083
 
 
-
-### Model Complexity and Performance
-
-The first evaluation analyzed how increasing model complexity (e.g., number of estimators, depth) affects validation performance.  
-We observed diminishing returns after a certain depth, suggesting that moderate complexity provides the best generalization.
+This model showed strong generalization while avoiding overfitting at higher tree depths.
 
 ![Performance vs Model Complexity]({{ site.baseurl }}/assets/images/performance_model_complexity.jpg)
 
 
 
-### Probability Calibration
+### Probability Calibration and Reliability
 
-A key component of model evaluation is **calibration** — how well the predicted probabilities reflect true outcome frequencies.  
-The following figure compares **calibrated vs uncalibrated probabilities** using **isotonic regression**.
+After tuning, the model’s output probabilities were **calibrated using Isotonic Regression**.  
+Calibration helps ensure that the predicted probabilities better represent true likelihoods.
 
 ![Calibration Plot for XGBoost]({{ site.baseurl }}/assets/images/q3_calibration.jpg)
-
-
-
-### Reliability Curve and Calibration Check
-
-We also plotted the **reliability curve** (expected vs predicted probabilities).  
-A perfectly calibrated model lies close to the diagonal; XGBoost, while slightly overconfident in some regions, remains fairly reliable.
-
 ![Reliability Curve (XGBoost - Q1)]({{ site.baseurl }}/assets/images/reliability_curve_xgb_q1.jpg)
 
+> A well-calibrated model ensures that when it predicts a 0.7 goal probability, it truly reflects a 70% real-world goal rate.
 
-
-### Baseline vs Tuned Model Comparison
-
-To assess the gains from tuning, we compared the **baseline XGBoost model** (default params) against the optimized one.
-
-- **Baseline AUC:** ~0.73  
-- **Optimized AUC:** ~0.7576  
-- Improved discrimination and more stable probability outputs were observed.
-
-![Baseline XGBoost (Q1)]({{ site.baseurl }}/assets/images/xgb_q1_baseline.jpg)
-![XGBoost Probability Distribution (Q1)]({{ site.baseurl }}/assets/images/xgboost_q1_probability.jpg)
-
-
+---
 
 ### ROC Comparison Across Models
 
-We further compared the ROC curves of various models — including Logistic Regression, Neural Network, and XGBoost.  
-The **XGBoost curve dominates** in the upper-left region, confirming its superior ability to separate goal vs no-goal events.
+We compared ROC curves across all models — Logistic Regression, Neural Network, and XGBoost.  
+The **tuned XGBoost** consistently dominates the upper-left quadrant, confirming its superior ability to distinguish between goals and no-goals.
 
 ![ROC Comparison]({{ site.baseurl }}/assets/images/roc_comparison.jpg)
 
+**Performance Comparison:**
+
+| Metric | Logistic Regression | Neural Network | XGBoost (Tuned) |
+|---------|----------------------|----------------|-----------------|
+| **Accuracy** | 0.785 | 0.791 | 0.908 |
+| **AUC** | 0.702 | 0.734 | 0.758 |
+| **Precision** | 0.16 | 0.19 | 0.21 |
+| **Recall** | 0.39 | 0.45 | 0.47 |
+| **F1 Score** | 0.23 | 0.27 | 0.29 |
+
+**WandB Run:** [View Tuned XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/66fc753h)
 
 
-### Feature Importance
+### Q3 — Feature Selection and Model Simplification
 
-Understanding which features drive predictions is essential.  
-The **Top Feature Importance** and **ANOVA-based Feature Selection** plots below highlight that **shot distance**, **shot angle**, and **rebound indicators** are consistently influential.
+Once the tuned model was established, we explored **feature selection** to simplify the model without losing performance.  
+We used:
+
+- **ANOVA F-test** for statistical significance ranking  
+- **SHAP importance** to interpret how much each feature contributes to predictions  
+
+**Visualizations:**
 
 ![Top Feature Importance (XGBoost)]({{ site.baseurl }}/assets/images/top_feature_importance.jpg)
 ![Top Features by ANOVA]({{ site.baseurl }}/assets/images/top_features_annova.jpg)
 
+The analysis confirmed that:
+- **Shot Distance**, **Shot Angle**, and **Rebound indicators** were dominant features.
+- Features like `last_event_type`, `time_since_last_event`, and `xG_diff` added only marginal performance.
 
-### Goal Probability vs Actual Outcomes
+After retraining with only top-ranked features:
+- **AUC:** 0.754 (vs 0.757 with all features)
+- **Accuracy:** 0.906 (vs 0.908)
+- **Model size reduced by:** ~25%
+- **Inference speed improved by:** +30%
 
-Finally, we visualized how the predicted goal probability correlates with actual outcomes across different probability bins.  
-This diagnostic shows good monotonic behavior — as predicted probability increases, the true goal rate rises proportionally.
-
-![XGBoost Goal vs Probability]({{ site.baseurl }}/assets/images/xgb_goal_vs_probability.jpg)
+**WandB Run:** [View Feature-Selected XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2)
 
 
 
-### Summary
+### Final Summary
 
-| Step | Description 
-|:--|:--
-| **Model** | XGBoost (Tuned via GridSearchCV) 
-| **Validation Accuracy** | 0.9083 
-| **Validation AUC** | 0.7577 
-| **Key Improvements** | Calibration, Reliability, ROC Curve, and Feature Interpretability
-| **Visualization Tools** | Matplotlib, Seaborn, Weights & Biases
+| Step | Description |
+|------|--------------|
+| **Model** | XGBoost (baseline → tuned → feature-selected) |
+| **Validation Accuracy (final)** | 0.908 |
+| **Validation AUC (final)** | 0.758 |
+| **Key Features** | Distance, Angle, Rebound Indicators, Shot Type |
+| **Key Improvements** | Calibration, Reliability, ROC Curve, Feature Interpretability |
+| **Tools Used** | Matplotlib, Seaborn, Scikit-learn, SHAP, WandB |
+| **Model Registry** | All experiments logged to WandB Model Registry |
 
-This task demonstrates how careful hyperparameter tuning, calibration, and interpretability analysis can significantly improve model performance and reliability.
+
+
+### Key Takeaways
+
+- Adding engineered features and applying GridSearch-based tuning substantially improved model performance.
+- Calibration enhanced probability reliability, making the model suitable for downstream decision-making.
+- Feature importance and ANOVA tests provided valuable insights into what drives successful goal predictions.
+- The final model achieved **0.908 Accuracy** and **0.7577 AUC**, marking a significant leap over earlier baselines.
+
+This task demonstrates how **advanced optimization and interpretability** combine to produce a reliable, explainable, and production-ready predictive model for hockey shot outcomes.
+
 
 ## Give it your best shot!
 

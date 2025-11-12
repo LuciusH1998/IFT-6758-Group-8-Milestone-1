@@ -228,9 +228,6 @@ This modified dataset gives a good foundation for training more complex expected
 **Tidy Data Updated Table W&B link:** [View 2017 NHL Game Dataset on W&B](https://wandb.ai/IFT6758-2025-B08/my_project/artifacts/dataset/wpg_v_wsh_2017021065/v3/files/wpg_v_wsh_2017021065.table.json)
 
 
-
-
-
 ## Advanced Models
 
 In this section, we advanced beyond the baseline Logistic Regression and Neural Network models to build **high-performance XGBoost classifiers**.  
@@ -253,11 +250,11 @@ This model served as a comparison to the fully tuned models trained later with t
 - Evaluation metric: `roc_auc`
 
 **Results:**
-- Validation Accuracy: **0.9082**
-- Validation AUC: **0.7422**
+- Validation Accuracy: **0.9042**
+- Validation AUC: **0.7149**
 - FAST training complete and all plots saved.
 
-These results already surpassed Logistic Regression from Task 3, showing XGBoost’s strength in capturing nonlinear patterns.
+These results already surpassed Logistic Regression's baseline model where the AUC is 0.69 from Task 3, showing XGBoost’s strength in capturing nonlinear patterns in comparison to Logistic Regression. In summary, Logistic Regression is a worse classifier for expected goals than XGBoost. 
 
 **Visualizations:**
 
@@ -283,11 +280,11 @@ We next trained an **XGBoost classifier** using all engineered features (26 tota
 | Hyperparameter | Tested Range |
 |----------------|---------------|
 | `learning_rate` | [0.01, 0.05, 0.1] |
-| `max_depth` | [3, 5, 7] |
-| `n_estimators` | [100, 200, 300] |
-| `colsample_bytree` | [0.6, 0.8, 1.0] |
-| `subsample` | [0.6, 0.8, 1.0] |
-| `min_child_weight` | [1, 3, 5] |
+| `max_depth` | [5, 7] |
+| `n_estimators` | [100, 200] |
+| `colsample_bytree` | [0.8] |
+| `subsample` | [0.8] |
+| `min_child_weight` | [1] |
 
 **Best Configuration:**
 colsample_bytree = 0.8
@@ -391,15 +388,6 @@ After retraining with only top-ranked features:
 - The final model achieved **0.908 Accuracy** and **0.7577 AUC**, marking a significant leap over earlier baselines.
 
 This task demonstrates how **advanced optimization and interpretability** combine to produce a reliable, explainable, and production-ready predictive model for hockey shot outcomes.
-
-
-**XGB Boost Baseline Run Trained on Distance & Angle Only:** [XGB Boost Baseline Distance & Angle WANB Summary](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/wmf4j068)
-
-
-**XGB Boost Baseline Run Trained on All Features:** [XGB Boost All Features](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/66fc753h)
-
-**XGB Boost Baseline Run Trained on Selected Features:** [XGB Boost Selected Features](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/rs1c75w8)
-
 ## Give it your best shot!
 
 ## Evaluate on test set! 

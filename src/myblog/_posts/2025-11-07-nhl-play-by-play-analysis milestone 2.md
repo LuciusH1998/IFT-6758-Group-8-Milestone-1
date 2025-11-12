@@ -111,7 +111,7 @@ Overall, the histogram distribution connects with common sense hockey logic: clo
 
 When we use the distance from the hockey net as the given input, we first trained a baseline Logistic Regression model with set default parameters to predict whether a hockey shot is a successful goal. The validation accuracy of the model was around 0.906, which may seem strong. However, the closer inspection of the given classification report and the confusion matrix displays that the model predicted the “no goal” class for all samples. The models achieves 100 % recall for non-goals and 0 % recall for goals. This predictive behaviour results from the severe class imbalance in the dataset for goals vs no goals — where goals represent a small fraction of all hockey shots.
 
-Although we can see that the prediction accuracy is high, this is highly misleading. This is because the model essentially always learned to always predict the majority class. This signifies that given accuracy is not a reliable evaluation metric for an imbalanced binary classification question that we see here. If we wanted to properly analyze the model's performance, we will examine probability-based metrics such as ROC curves, AUC, and calibration plots in later sections to allow us to better understand the how successful the model is. 
+Although we can see that the prediction accuracy is high, this is misleading. This is because the model essentially always learned to predict the majority class. This signifies that given accuracy is not a reliable evaluation metric for an imbalanced binary classification question. If we wanted to properly analyze the model's performance, we will examine probability-based metrics such as ROC curves, and calibration plots in later sections to allow us to better understand the how successful the model is. 
 
 In conclusion, this baseline experiment indicates that while distance clearly influences goal likelihood, a simple linear classifier like a Logistic Regression model trained on raw labels cannot capture the true probabilistic nature of expected goals (xG) without good managing of class imbalances and more complicated features.
 
@@ -130,7 +130,7 @@ Additionally, given that it relies on a single feature — distance from the net
 b) The plot of goal rate by probability percentile displays a significant upward trend — the higher the predicted probability percentile leads to a higher goal rate.
 Ultimately, this confirms that the model’s probability outputs are meaningful: even if these are imperfectly calibrated, they increase monotonically with the goal rate.
 
-However, you can see some variation exists across percentiles, the general pattern confirms that the model captures key factors influencing scoring probability particularly distance. However, the curve’s fairly gradual slope also suggests that the model’s discrimination power is moderate — meaning it separates likely from unlikely goals, although it is perfectly.
+However, you can see some variation exists across percentiles, the general pattern confirms that the model captures that distance influences scoring probability. However, the curve’s fairly gradual slope also suggests that the model’s discrimination power is moderate — meaning it separates likely from unlikely goals, although imperfectly.
 
 In conclusion, the logistic regression model’s predicted probabilities does correlate positively with the actual goal frequency. This demonstrates that the baseline Logistic Regression Model effectively provides useful, though imperfectly calibrated, expected-goal estimates.
 
@@ -149,9 +149,19 @@ Overall, these diagnostics and plots demonstrate that while the distance-only lo
 
 ![ROC Curve for Logistic Regression Models]({{ site.baseurl }}/assets/images/image-33.png)
 
+ROC Curve for Logistic Regression Models on WANB: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/r01d0bhp)
+
 ![Goal Rate Compared to given Model Percentile]({{ site.baseurl }}/assets/images/image-34.png)
 
+Goal Rate Curve on WANB: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/blfsfei1)
+
 ![Cumulative Number of Goal Compared to Cumulative Number of Shots]({{ site.baseurl }}/assets/images/image-35.png)
+
+Cumulative Goal Curve: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/b1sin6i8)
+
+![Calibration Curve for Different Feature Combinations]({{ site.baseurl }}/assets/images/image-37.png)
+
+Calibration Curve: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/brvsei5q)
 
 To test how certain geometric features contribute to scoring probability, we trained three Logistic Regression classifiers — one which only used distance, one which only used angles, and one which used distance and angles together — and compared these to a random baseline. Subsequently, the model’s outputs were evaluated with the same metrics as before: ROC curve (AUC), goal rate by percentile, and cumulative goal curve.
 
@@ -166,6 +176,11 @@ When shots were categorized by predicted probability percentile, the combined mo
 Cumulative Goal Proportion
 
 The cumulative goal plots reinforced the findings above: the combined distance and angle model captured goals more efficiently than the other models. The combined model reaches a higher cumulative goal fraction compared to any other given shot percentile. Contrastingly, the angle-only and random models seriously lagged behind. The graph which used only the distance or angle feature showed weaker goal concentration among higher-probability shots.
+
+Calibration Curve 
+
+The calibration curve illustrates how well the predicted goal probabilities align with actual outcomes across all four models. As shown, the distance + angle model (blue) lies closest to the diagonal, indicating the most reliable calibration and the lowest Brier score (≈ 0.081). Both distance-only (green) and angle-only (red) models show reasonable calibration but tend to slightly under-predict goal likelihoods at higher probability bins. The random baseline (orange) remains nearly flat, confirming it provides no informative signal. Overall, these results demonstrate that incorporating both distance and angle features produces a better-calibrated logistic regression model, where predicted probabilities meaningfully reflect real scoring frequencies.
+
 
 Interpretation
 

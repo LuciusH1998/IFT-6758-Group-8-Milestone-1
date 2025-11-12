@@ -213,7 +213,7 @@ Tidy Data Updated Table W&B link: [View Dataset on W&B](https://wandb.ai/IFT6758
 ## Advanced Models
 
 In this section, we advanced beyond the baseline Logistic Regression and Neural Network models to build **high-performance XGBoost classifiers**.  
-Our goal was to analyze whether the inclusion of all engineered features, combined with **hyperparameter tuning, calibration**, and **feature selection**, can enhance predictive performance.
+Our goal was to analyze whether the inclusion of engineered features, combined with **hyperparameter tuning, calibration**, and **feature selection**, can enhance predictive performance.
 
 All experiments were tracked through **Weights & Biases (wandb)** for transparency and reproducibility.
 
@@ -221,14 +221,13 @@ All experiments were tracked through **Weights & Biases (wandb)** for transparen
 
 ### Q1 — Baseline XGBoost (Distance & Angle Only)
 
-The first step was to train a **baseline XGBoost model** using only the `shot_distance` and `shot_angle` features.  
-This model served as a comparison to the fully tuned models trained later with the complete feature set.
+The first step was to train a **baseline XGBoost model** using only the `distance_from_net` and `angle_from_net` features.  
+This model served as a comparison to Logistic Regression and provided a baseline before incorporating all engineered features.
 
 **Training setup:**
-- Train shape: (262,031 × 32)
-- Validation shape: (65,311 × 32)
-- Subsampled training set: (65,507 × 1,205)
-- Optimizer: `XGBoostClassifier` (default parameters)
+- Train shape: (262,031 × 3)
+- Validation shape: (65,311 × 3)
+- Optimizer: `XGBClassifier` (default parameters)
 - Evaluation metric: `roc_auc`
 
 **Results:**
@@ -240,14 +239,15 @@ These results already surpassed Logistic Regression from Task 3, showing XGBoost
 
 **Visualizations:**
 
-![Baseline XGBoost (Q1)]({{ site.baseurl }}/assets/images/xgb_q1_baseline.jpg)
-![XGBoost Probability Distribution (Q1)]({{ site.baseurl }}/assets/images/xgboost_q1_probability.jpg)
+![XGBoost vs Logistic Regression ROC]({{ site.baseurl }}/assets/images/roc_curve_xgb_vs_logistic.png)
 ![XGBoost Goal vs Probability]({{ site.baseurl }}/assets/images/xgb_goal_vs_probability.jpg)
-![Reliability Curve (XGBoost - Q1)]({{ site.baseurl }}/assets/images/reliability_curve_xgb_q1.jpg)
+
 
 **WandB Run:** [View Baseline XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2)
 
+> ⚡ **Observation:** Even with just two features, XGBoost outperforms Logistic Regression in both AUC and calibration, demonstrating its capability to model nonlinear relationships in hockey shot data.
 
+---
 
 ### Q2 — XGBoost with All Features and Hyperparameter Tuning
 
@@ -269,39 +269,40 @@ We next trained an **XGBoost classifier** using all engineered features (26 tota
 | `min_child_weight` | [1, 3, 5] |
 
 **Best Configuration:**
-colsample_bytree = 0.8
-learning_rate = 0.05
-max_depth = 5
-min_child_weight = 1
-n_estimators = 200
-subsample = 0.8
-Best CV AUC = 0.7576
-Validation AUC = 0.7577
-Validation Accuracy = 0.9083
+- colsample_bytree = 0.8  
+- learning_rate = 0.05  
+- max_depth = 5  
+- min_child_weight = 1  
+- n_estimators = 200  
+- subsample = 0.8  
 
-
-This model showed strong generalization while avoiding overfitting at higher tree depths.
+**Performance:**
+- Best CV AUC = 0.7576  
+- Validation AUC = 0.7577  
+- Validation Accuracy = 0.9083  
 
 ![Performance vs Model Complexity]({{ site.baseurl }}/assets/images/performance_model_complexity.jpg)
 
+This model showed strong generalization while avoiding overfitting at higher tree depths.
 
+---
 
 ### Probability Calibration and Reliability
 
 After tuning, the model’s output probabilities were **calibrated using Isotonic Regression**.  
-Calibration helps ensure that the predicted probabilities better represent true likelihoods.
+Calibration ensures predicted probabilities closely reflect true outcome frequencies.
 
 ![Calibration Plot for XGBoost]({{ site.baseurl }}/assets/images/q3_calibration.jpg)
 ![Reliability Curve (XGBoost - Q1)]({{ site.baseurl }}/assets/images/reliability_curve_xgb_q1.jpg)
 
-> A well-calibrated model ensures that when it predicts a 0.7 goal probability, it truly reflects a 70% real-world goal rate.
+> ⚡ A well-calibrated model ensures that a predicted 0.7 goal probability corresponds to a real-world 70% chance of scoring.
 
 ---
 
 ### ROC Comparison Across Models
 
-We compared ROC curves across all models — Logistic Regression, Neural Network, and XGBoost.  
-The **tuned XGBoost** consistently dominates the upper-left quadrant, confirming its superior ability to distinguish between goals and no-goals.
+We compared ROC curves across Logistic Regression, Neural Network, and XGBoost.  
+The **tuned XGBoost** dominates the upper-left quadrant, confirming its superior ability to distinguish between goals and no-goals.
 
 ![ROC Comparison]({{ site.baseurl }}/assets/images/roc_comparison.jpg)
 
@@ -317,33 +318,34 @@ The **tuned XGBoost** consistently dominates the upper-left quadrant, confirming
 
 **WandB Run:** [View Tuned XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/66fc753h)
 
+---
 
 ### Q3 — Feature Selection and Model Simplification
 
 Once the tuned model was established, we explored **feature selection** to simplify the model without losing performance.  
-We used:
+Techniques used:
 
 - **ANOVA F-test** for statistical significance ranking  
-- **SHAP importance** to interpret how much each feature contributes to predictions  
+- **SHAP values** for feature contribution interpretation  
 
 **Visualizations:**
 
 ![Top Feature Importance (XGBoost)]({{ site.baseurl }}/assets/images/top_feature_importance.jpg)
 ![Top Features by ANOVA]({{ site.baseurl }}/assets/images/top_features_annova.jpg)
 
-The analysis confirmed that:
-- **Shot Distance**, **Shot Angle**, and **Rebound indicators** were dominant features.
-- Features like `last_event_type`, `time_since_last_event`, and `xG_diff` added only marginal performance.
+**Findings:**
+- **Shot Distance**, **Shot Angle**, and **Rebound indicators** were dominant.  
+- Features like `last_event_type` and `time_since_last_event` added marginal improvement.
 
 After retraining with only top-ranked features:
-- **AUC:** 0.754 (vs 0.757 with all features)
-- **Accuracy:** 0.906 (vs 0.908)
-- **Model size reduced by:** ~25%
+- **AUC:** 0.754 (vs 0.757 with all features)  
+- **Accuracy:** 0.906 (vs 0.908)  
+- **Model size reduced by:** ~25%  
 - **Inference speed improved by:** +30%
 
 **WandB Run:** [View Feature-Selected XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2)
 
-
+---
 
 ### Final Summary
 
@@ -357,17 +359,16 @@ After retraining with only top-ranked features:
 | **Tools Used** | Matplotlib, Seaborn, Scikit-learn, SHAP, WandB |
 | **Model Registry** | All experiments logged to WandB Model Registry |
 
-
+---
 
 ### Key Takeaways
 
-- Adding engineered features and applying GridSearch-based tuning substantially improved model performance.
-- Calibration enhanced probability reliability, making the model suitable for downstream decision-making.
-- Feature importance and ANOVA tests provided valuable insights into what drives successful goal predictions.
-- The final model achieved **0.908 Accuracy** and **0.7577 AUC**, marking a significant leap over earlier baselines.
+- XGBoost with only `distance` and `angle` already outperforms Logistic Regression.  
+- Adding all engineered features and tuning hyperparameters further improved performance (0.908 Accuracy, 0.7577 AUC).  
+- Probability calibration ensured reliable predictions for decision-making.  
+- Feature selection simplified the model without significant performance loss, improving speed and interpretability.  
 
-This task demonstrates how **advanced optimization and interpretability** combine to produce a reliable, explainable, and production-ready predictive model for hockey shot outcomes.
-
+> ✅ This task demonstrates how **advanced optimization and interpretability** combine to produce a reliable, explainable, and production-ready predictive model for hockey shot outcomes.
 
 ## Give it your best shot!
 

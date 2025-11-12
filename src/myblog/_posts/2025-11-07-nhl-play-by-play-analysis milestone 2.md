@@ -127,19 +127,23 @@ Additionally, given that it relies on a single feature — distance from the net
 
 ![Goal Rate based on Predicted Probability Percentile]({{ site.baseurl }}/assets/images/image-30.png)
 
-b) The bar plot of goal rate by probability percentile displays a significant upward trend — the higher the predicted confidence leads to a higher observed goal frequency.
-Ultimately, this confirms that the model’s probability outputs are meaningful: even if these are imperfectly calibrated, they increase monotonically with the given actual scoring likelihood.
+b) The plot of goal rate by probability percentile displays a significant upward trend — the higher the predicted probability percentile leads to a higher goal rate.
+Ultimately, this confirms that the model’s probability outputs are meaningful: even if these are imperfectly calibrated, they increase monotonically with the goal rate.
+
+However, you can see some variation exists across percentiles, the general pattern confirms that the model captures key factors influencing scoring probability particularly distance. However, the curve’s fairly gradual slope also suggests that the model’s discrimination power is moderate — meaning it separates likely from unlikely goals, although it is perfectly.
+
+In conclusion, the logistic regression model’s predicted probabilities does correlate positively with the actual goal frequency. This demonstrates that the baseline Logistic Regression Model effectively provides useful, though imperfectly calibrated, expected-goal estimates.
 
 ![Cumulative Proportion of Goals vs Model Probability Percentile]({{ site.baseurl }}/assets/images/image-31.png)
 
-c) The cumulative goal curve increases drastically as we go above the random baseline, which displays that a relatively small fraction of top-scoring shots explain a large portion of all goals.These results imply that the logistic regression model can effectively rank shots by quality, which then identifies higher-probability events even if we have more limited information.
+c) The cumulative goal curve increases drastically as we increase the probability percentile, which displays that a relatively small fraction of top-scoring shots explain a large portion of all goals. These results imply that the logistic regression model can effectively rank shots by quality, which then identifies higher-probability events even if we have more limited information. This curve ultimately demonstrates that the logistic regression model effectively discriminates between high- and low-quality scoring opportunities, providing meaningful expected-goal estimates even if the logistic regression calibration is again not perfect.
+
 
 ![Calibration Curve]({{ site.baseurl }}/assets/images/image-32.png)
 
-d) This given calibration curve indicates that predicted probabilities are centered near 0–0.2 and are close to the diagonal. This effectively means that the model is well-calibrated within the lower-probability regions.
-However, because the given predicted values are already small, the model seems to underestimate the likelihood of rare goal events. This is another reflection of the dataset’s strong class imbalance.
+d) This given calibration curve indicates that predicted probabilities are centered near 0–0.2 and are close to the diagonal. This effectively means that the Logistic Regression model is well-calibrated within the lower-probability regions. However, because the given predicted values are already small, the model seems to underestimate the likelihood of rare goal events. This is another reflection of the dataset’s strong class imbalance.
 
-Summary: Overall, these diagnostics and plots demonstrate that while the distance-only logistic regression model is simple, it generally captures the correct pattern between shot proximity and goal probability. This moderate AUC and reasonable calibration make it a decent baseline, but we will need better and richer contextual features that will be required to improve discrimination and probability accuracy in later stages.
+Overall, these diagnostics and plots demonstrate that while the distance-only logistic regression model is simple, it generally captures the correct pattern between shot proximity and goal probability. This moderate AUC and reasonable calibration make it a decent baseline, but we will need better and richer contextual features that will be required to improve discrimination and probability accuracy in later stages.
 
 ### 3. 
 
@@ -149,7 +153,7 @@ Summary: Overall, these diagnostics and plots demonstrate that while the distanc
 
 ![Cumulative Number of Goal Compared to Cumulative Number of Shots]({{ site.baseurl }}/assets/images/image-35.png)
 
-To test how certain geometric features contribute to scoring probability, we trained three Logistic Regression classifiers — one which only used distance, one which only used angles, and one which used distance and angles together — and compared these to a random baseline. Subsequently, the model’s outputs were evaluated with the same metrics as before: ROC curve (AUC), goal rate by percentile, cumulative goal curve, and lastly calibration.
+To test how certain geometric features contribute to scoring probability, we trained three Logistic Regression classifiers — one which only used distance, one which only used angles, and one which used distance and angles together — and compared these to a random baseline. Subsequently, the model’s outputs were evaluated with the same metrics as before: ROC curve (AUC), goal rate by percentile, and cumulative goal curve.
 
 ROC Curve
 
@@ -157,7 +161,7 @@ As shown in the ROC comparison, the distance-only model achieved an AUC of 0.690
 
 Goal Rate by Predicted Percentile
 
-When shots were categorized by predicted probability percentile, the combined model of using both distance and angles showed the clearest monotonic relationship between model confidence and actual goal frequency. The distance-only curve generally followed a similar trend, while the angle-only model remained largely flat. This suggested that considering angle individually is less discriminative but can refine predictions if we use it in conjuction with distance.
+When shots were categorized by predicted probability percentile, the combined model of using both distance and angles showed the clearest monotonic relationship between model predictive probability and actual goal frequency. The distance-only curve generally followed a similar trend, while the angle-only model remained largely flat. This suggested that considering angle individually is less discriminative but can refine predictions if we use it in conjuction with distance.
 
 Cumulative Goal Proportion
 

@@ -68,7 +68,7 @@ These plots reveal interpretable and understandable relationships between shot d
 
 ### 2)
 
-Goal Rate Analysis by Distance and Angle: 
+**Goal Rate Analysis by Distance and Angle:** 
 
 This better analysis understands how shot geometry affects scoring outcomes, specifically we defined the goal rate as
 
@@ -78,15 +78,15 @@ where goal rate is a function of both distance from the net and shot angle.
 
 ![Plots of Goal Rates Compared to Distance and Angle from Net]({{ site.baseurl }}/assets/images/image-26.png)
 
-i) Plot 1: Goal Rate vs. Distance
+i) **Plot 1: Goal Rate vs. Distance**
 
 Figure 1 displays a steep and nonlinear decline in goal rate as distance from the net increases. The plot shows that shots taken within 10 feet of the crease have an approximately 30 % chance of resulting in a goal — the highest success rate in the dataset Subsequently, the probability of scoring decreases rapidly between 10 ft – 30 ft, and ultimately falling below 10 % past 40 ft. After we go past 60 ft, the goal rate decreases below 5 %. This suggests that shots from long range almost never beat the goalie unless these given shots are to an empty-net or deflections. This rapid exponential-like decay reconfirms that the closeness to goal is the most influential spatial factor for scoring probability.
 
-ii) Plot 2: Goal Rate vs. Angle
+ii) **Plot 2: Goal Rate vs. Angle**
 
 Figure 2 displays a complementary trend with respect to goal rate in relation to angle. The strongest goal rates (between 12–14 %) occur for shots taken from key positions (between 0° – 20°) taken directly in front of the net. The success rate for the goal rate vs angle diminishes rapidly as we take shots from larger angles. This goal rate then falls below 6% for shots beyond 60°, where hockey players are likely shooting from behind the goal line or from the rink's sideboards. The small bump in goal rate between 25°–35° could be derived from cross-ice passes or one-timers. This momentarily increases scoring chances even if we see bigger angles.
 
-iii) Overall Interpretation
+iii) **Overall Interpretation**
 
 All in all, these results show the importance of spatial dependency of shot quality for hockey. In essence, the closer and more central the shots are significantly more likely to score. 
 Significantly, Distance and angle connect together, they help define the “high-danger scoring area” — which corresponds approximately the slot in front of the crease within 25 ft and 30° of center. 
@@ -149,40 +149,40 @@ Overall, these diagnostics and plots demonstrate that while the distance-only lo
 
 ![ROC Curve for Logistic Regression Models]({{ site.baseurl }}/assets/images/image-33.png)
 
-ROC Curve for Logistic Regression Models on WANB: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/r01d0bhp)
+**ROC Curve for Logistic Regression Models on WANB**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/r01d0bhp)
 
 ![Goal Rate Compared to given Model Percentile]({{ site.baseurl }}/assets/images/image-34.png)
 
-Goal Rate Curve on WANB: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/blfsfei1)
+**Goal Rate Curve on WANB**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/blfsfei1)
 
 ![Cumulative Number of Goal Compared to Cumulative Number of Shots]({{ site.baseurl }}/assets/images/image-35.png)
 
-Cumulative Goal Curve: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/b1sin6i8)
+**Cumulative Goal Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/b1sin6i8)
 
 ![Calibration Curve for Different Feature Combinations]({{ site.baseurl }}/assets/images/image-37.png)
 
-Calibration Curve: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/brvsei5q)
+**Calibration Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/brvsei5q)
 
 To test how certain geometric features contribute to scoring probability, we trained three Logistic Regression classifiers — one which only used distance, one which only used angles, and one which used distance and angles together — and compared these to a random baseline. Subsequently, the model’s outputs were evaluated with the same metrics as before: ROC curve (AUC), goal rate by percentile, and cumulative goal curve.
 
-ROC Curve
+**ROC Curve**
 
 As shown in the ROC comparison, the distance-only model achieved an AUC of 0.690, while the angle-only model performed worse at 0.565, indicating that distance is a much stronger single predictor of scoring likelihood. The combined distance + angle model reached the highest AUC of 0.708, confirming that angle adds complementary information about shot positioning. All three models performed well above the random baseline (AUC ≈ 0.49), demonstrating that even simple geometric inputs capture meaningful spatial structure in scoring events.
 
-Goal Rate by Predicted Percentile
+**Goal Rate by Predicted Percentile**
 
 When shots were categorized by predicted probability percentile, the combined model of using both distance and angles showed the clearest monotonic relationship between model predictive probability and actual goal frequency. The distance-only curve generally followed a similar trend, while the angle-only model remained largely flat. This suggested that considering angle individually is less discriminative but can refine predictions if we use it in conjuction with distance.
 
-Cumulative Goal Proportion
+**Cumulative Goal Proportion**
 
 The cumulative goal plots reinforced the findings above: the combined distance and angle model captured goals more efficiently than the other models. The combined model reaches a higher cumulative goal fraction compared to any other given shot percentile. Contrastingly, the angle-only and random models seriously lagged behind. The graph which used only the distance or angle feature showed weaker goal concentration among higher-probability shots.
 
-Calibration Curve 
+**Calibration Curve**
 
 The calibration curve illustrates how well the predicted goal probabilities align with actual outcomes across all four models. As shown, the distance + angle model (blue) lies closest to the diagonal, indicating the most reliable calibration and the lowest Brier score (≈ 0.081). Both distance-only (green) and angle-only (red) models show reasonable calibration but tend to slightly under-predict goal likelihoods at higher probability bins. The random baseline (orange) remains nearly flat, confirming it provides no informative signal. Overall, these results demonstrate that incorporating both distance and angle features produces a better-calibrated logistic regression model, where predicted probabilities meaningfully reflect real scoring frequencies.
 
 
-Interpretation
+**Interpretation**
 
 In conclusion, these comparisons indicate that the distance from the net is the larger geometric determinant of goal probability. However, adding the shot angle marginally improves the model's discrimination ability. The combination of distance and angle model produces a more holistic understanding of the shot quality — this provides a foundation for more advanced feature engineering and hyperparameter tuning later in the milestones.
 
@@ -190,14 +190,14 @@ In conclusion, these comparisons indicate that the distance from the net is the 
 
 ![Tidy_Data_Updated]({{ site.baseurl }}/assets/images/image-36.png)
 
-Feature Engineering II: Contextual and Power-Play Features
+**Feature Engineering II: Contextual and Power-Play Features**
 
 Continuing on the transformed shot-level data from the previous sections, the dataset was augmented with new features that convey game-context and spatio-temporal dynamics.
 The resulting tidy_data_updated has 21 columns, which combines raw shot information, event-based contexts, and adds special-team situations all together.
 
 The table below is the feature/column list of tidy_data_updated with a description for each feature:
 
-Column Name	Description
+**Column Name	Description**
 1. game_id: The unique identifier for each NHL game.
 2. game_seconds: The total completed seconds from the game's start.
 3. game_period: The period of the given hockey game (1, 2, 3, or OT) at the moment.
@@ -217,13 +217,13 @@ Column Name	Description
 19. time_since_power_play_start: The elapsed seconds since the start of a power-play; resets to 0 when the advantage ends.
 20. friendly_skaters, 21. opposing_skaters: The number of non-goalie skaters on each team, this accounts for specific penalties and power-play situations.
 
-Summary and Insights
+**Summary and Insights**
 
 These engineered features transform the dataset with temporal flow, event sequence, and situational awareness, enabling more realistic modeling of how goals occur in-game context.
 Specifically, features like rebound, speed, and change_in_shot_angle measure the danger of the shot subsequent to following prior plays, while the power-play indicators (time_since_power_play_start, friendly_skaters, opposing_skaters) indicate how these given situations influence goal probability.
 This modified dataset gives a good foundation for training more complex expected goals (xG) models which are capable of reflecting complete dynamics of NHL end-to-end play sequences.
 
-Tidy Data Updated Table W&B link: [View Dataset on W&B](https://wandb.ai/IFT6758-2025-B08/my_project/artifacts/dataset/wpg_v_wsh_2017021065/v3/files/wpg_v_wsh_2017021065.table.json)
+**Tidy Data Updated Table W&B link:** [View 2017 NHL Game Dataset on W&B](https://wandb.ai/IFT6758-2025-B08/my_project/artifacts/dataset/wpg_v_wsh_2017021065/v3/files/wpg_v_wsh_2017021065.table.json)
 
 
 ## Advanced Models

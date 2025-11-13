@@ -35,68 +35,66 @@ is_goal – binary indicator (1 = goal, 0 = no goal)
 
 empty_net – the binary indicator for whether the net was empty at the time of the shot
 
-The final training dataset was designated as the NHL season data between 2016 to 2020 which contained over 1.28 million shot events, while the 2020/21 season data was reserved as the untouched test set.
+The final training dataset was designated as the NHL season data between 2016 to 2020 which contained over 1.28 million shot events, while the 2020/21 season data was reserved as the untouched test set. Recall that for the histograms below, 0 = no goal and 1 = goal. 
 
 ### 1 a) Histogram Distribution by Distance 
 
 ![Histogram Distribution by Distance]({{ site.baseurl }}/assets/images/image-23.png)
 
-The first histogram displays the shots  binned by distance from the net, separated by goal outcome. The histogram reveals that most shots occur within 10–40 feet of the net, and as expected, goals themselves are concentrated in shorter distances. This makes intuitive sense as it is easy to score goals closer to the net. 
-The goal frequency decreases drastically beyond 30 feet, this confirms that shot success probability decreases with distance. 
-The orange bars (goals) essentially disappears beyond 60 feet, consistent with the intuition that long-range shots are largely unsuccessful unless they occur under special conditions (e.g. deflections). All in all, this makes intuitive sense as it is harder to score farther away from the net. 
+The first histogram displays the shots  binned by distance from the net, separated by goal outcome. The histogram reveals that most shots occur within 10–20 feet of the net, and as expected, goals themselves are concentrated in shorter distances. This makes intuitive sense as it is easy to score goals closer to the net. 
+The goal frequency decreases drastically beyond 30 feet, this confirms that shot success probability decreases with distance. The orange bars (goals) essentially disappears beyond 60 feet, consistent with the intuition that long-range shots are largely unsuccessful unless they occur under special conditions (e.g. deflections). All in all, this makes intuitive sense as it is harder to score farther away from the net. 
 
 ### 1 b) Histogram Distribution by Angle
 
 ![Histogram Distribution by Angle]({{ site.baseurl }}/assets/images/image-24.png)
 
-The second histogram displays the plot shot counts by angle, where 0° corresponds to shots taken from directly in front of the hockey net and bigger angles displays positions farther away from the hockey net. 
-Moreover, we observe shots taken from smaller angles (specifically between 0–30°) likely display a higher proportion of goals compared to shots taken from larger angles which are more difficult to score from. 
-In conclusion, the decrease in the number of shots and goal scoring rate at wider angles conveys how shooting geometry minimizes scoring chances, as goalkeepers could better cover the net at these larger angles. 
+The second histogram displays the plot shot counts by angle, where 0° corresponds to shots taken from directly in front of the hockey net and bigger angles displays positions farther away from the hockey net. Moreover, we observe shots taken from smaller angles (specifically between 0–30°) display a higher proportion of goals compared to shots taken from larger angles which are more difficult to score from. In conclusion, the decrease in the number of shots and goal scoring rate at wider angles conveys how shooting geometry minimizes scoring chances, as goalkeepers could better cover the net at these larger angles. 
 
 ### c) Histogram Joint Distribution of Distance and Angle 
 
 ![2D Histogram Distribution of Angle and Distance]({{ site.baseurl }}/assets/images/image-25.png)
 
-Lastly, the 2D joint plot (distance * angle) displays that the most shots are clustered around 15–35 feet and angles below 35 to 40°. This forms a dense region of high-frequency shooting activity which is situated directly in front of the net, in hockey this is known as the high-danger area.
+Lastly, the 2D joint plot (distance * angle) displays that the most shots are clustered around 0–20 feet and angles below 30°. This forms a dense region of high-frequency shooting activity which is situated directly in front of the net, in hockey this is known as the high-danger area.
 
 The heatmap coloring being more red indicates an increased density of events (and goal probabilities) around this given zone. This further reiterates the idea that shots leading to goals is location dependent. 
 
 ### Summary 
 
-All in all, these three histograms reconfirm the reliability of specific engineered geometric features.
-These plots reveal interpretable and understandable relationships between shot distance, angle, and the probability of scoring a goal. This lays the foundation for future models in which we can use distance and angles to help predict expected goals (xG).
+All in all, these three histograms reconfirm the reliability of specific engineered geometric features. These plots reveal interpretable and understandable relationships between shot distance, angle, and the probability of scoring a goal. This lays the foundation for future models in which we can use distance and angles to help predict expected goals (xG).
 
 ### 2)
 
 **Goal Rate Analysis by Distance and Angle:** 
 
-This better analysis understands how shot geometry affects scoring outcomes, specifically we defined the goal rate as
+This analysis understands how shot geometry affects scoring outcomes, specifically we defined the goal rate as
 
 Goal Rate = # Goals/(# Goals + # No-Goals)
 
 where goal rate is a function of both distance from the net and shot angle.
 
-![Plots of Goal Rates Compared to Distance and Angle from Net]({{ site.baseurl }}/assets/images/image-26.png)
+![Plots of Goal Rates Compared to Distance from Net]({{ site.baseurl }}/assets/images/image-26.png)
+
+![Plots of Goal Rates Compared to Angle from Net]({{ site.baseurl }}/assets/images/image-27.png)
+
 
 i) **Plot 1: Goal Rate vs. Distance**
 
-Figure 1 displays a steep and nonlinear decline in goal rate as distance from the net increases. The plot shows that shots taken within 10 feet of the crease have an approximately 30 % chance of resulting in a goal — the highest success rate in the dataset Subsequently, the probability of scoring decreases rapidly between 10 ft – 30 ft, and ultimately falling below 10 % past 40 ft. After we go past 60 ft, the goal rate decreases below 5 %. This suggests that shots from long range almost never beat the goalie unless these given shots are to an empty-net or deflections. This rapid exponential-like decay reconfirms that the closeness to goal is the most influential spatial factor for scoring probability.
+Figure 1 displays a steep and nonlinear decline in goal rate as distance from the net increases. The plot shows that shots taken within 10 feet of the crease have an approximately 30 % chance of resulting in a goal — the highest success rate in the dataset Subsequently, the probability of scoring decreases rapidly between 10 ft – 30 ft, and ultimately falling below 10 % after around 25 ft. After we go past 40 ft, the goal rate decreases below 5 %. This suggests that shots from long range almost never beat the goalie unless these given shots are to an empty-net or deflections. This rapid decay reconfirms that the closeness to goal is the most influential spatial factor for scoring probability.
+
 
 ii) **Plot 2: Goal Rate vs. Angle**
 
-Figure 2 displays a complementary trend with respect to goal rate in relation to angle. The strongest goal rates (between 12–14 %) occur for shots taken from key positions (between 0° – 20°) taken directly in front of the net. The success rate for the goal rate vs angle diminishes rapidly as we take shots from larger angles. This goal rate then falls below 6% for shots beyond 60°, where hockey players are likely shooting from behind the goal line or from the rink's sideboards. The small bump in goal rate between 25°–35° could be derived from cross-ice passes or one-timers. This momentarily increases scoring chances even if we see bigger angles.
+Figure 2 displays a complementary trend with respect to goal rate in relation to angle. The strongest goal rates (between 12–14 %) occur for shots taken from key positions (between 0° – 12°) taken directly in front of the net. The success rate for the goal rate vs angle diminishes rapidly as we take shots from larger angles. This goal rate then falls below 6% for shots beyond 70°, where hockey players are likely shooting from behind the goal line or from the rink's sideboards. The small increase in goal rate (which goes against the general trends) between three key angles (0 to 10°, 30 to 35°, 50 to 55°) on the graph could be derived from cross-ice passes or one-timers. This momentarily increases scoring chances even if we see bigger angles.
 
 iii) **Overall Interpretation**
 
-All in all, these results show the importance of spatial dependency of shot quality for hockey. In essence, the closer and more central the shots are significantly more likely to score. 
-Significantly, Distance and angle connect together, they help define the “high-danger scoring area” — which corresponds approximately the slot in front of the crease within 25 ft and 30° of center. 
-These geometric patterns connect well with common sense intuition on hockey knowledge and validate that engineered geometric features (distance and angle from net) are meaningful predictors for the expected-goals (xG) model which will be developed in the subsequent sections.
+All in all, these results show the importance of spatial dependency of shot quality for hockey. In essence, the closer and more central the shots are significantly more likely to score. Significantly, Distance and angle connect together, they help define the “high-danger scoring area” — which corresponds approximately the slot in front of the crease within 25 ft and 30° of center. These geometric patterns connect well with common sense intuition on hockey knowledge and validate that engineered geometric features (distance and angle from net) are meaningful predictors for the expected-goals (xG) model which will be developed in the subsequent sections.
 
 ### 3) 
 
-![Goal Distance Histogram Empty vs Non-Empty Net]({{ site.baseurl }}/assets/images/image-27.png)
+![Goal Distance Histogram Empty vs Non-Empty Net]({{ site.baseurl }}/assets/images/image-28.png)
 
-In order to verify the data quality and guarantee realistic shot coordinates, the goal events separated into bins as empty-net and non-empty-net categories were examined. In addition the histogram displays that non-empty-net goals are located between 0–40 ft, this averages around 21.8 ft, and we see that empty-net goals occur a considerable distance farther out, averaging at around 45 ft and extending all the way up to 98 ft. 
+In order to verify the data quality and guarantee realistic shot coordinates, the goal events separated into bins as empty-net and non-empty-net categories were examined. The histogram displays that non-empty-net goals are located between 0–40 ft, this averages around 21.69 ft, and we see that empty-net goals occur a considerable distance farther out, averaging at around 44.3 ft and extending all the way up to around 98 ft. 
 From the graph we can see that no non-empty-net goals surpass the cutoff threshold of 110 ft. This confirms that the recorded goals are all located within the real-life common sense on-ice distances.
 
 Essentially, a review of potential outliers found no real anomalies in the coordinate data or given shot type. We can see that occaisional long-range non-empty-net goals were were rare events in a hockey game (e.g., rebounds or delayed-penalty situations) compared to incorrect data errors.
@@ -107,39 +105,36 @@ Overall, the histogram distribution connects with common sense hockey logic: clo
 
 ### 1.
 
-![Logistic Regression Performance Metrics]({{ site.baseurl }}/assets/images/image-28.png)
+![Logistic Regression Performance Metrics]({{ site.baseurl }}/assets/images/image-29.png)
 
 When we use the distance from the hockey net as the given input, we first trained a baseline Logistic Regression model with set default parameters to predict whether a hockey shot is a successful goal. The validation accuracy of the model was around 0.906, which may seem strong. However, the closer inspection of the given classification report and the confusion matrix displays that the model predicted the “no goal” class for all samples. The models achieves 100 % recall for non-goals and 0 % recall for goals. This predictive behaviour results from the severe class imbalance in the dataset for goals vs no goals — where goals represent a small fraction of all hockey shots.
 
 Although we can see that the prediction accuracy is high, this is misleading. This is because the model essentially always learned to predict the majority class. This signifies that given accuracy is not a reliable evaluation metric for an imbalanced binary classification question. If we wanted to properly analyze the model's performance, we will examine probability-based metrics such as ROC curves, and calibration plots in later sections to allow us to better understand the how successful the model is. 
 
-In conclusion, this baseline experiment indicates that while distance clearly influences goal likelihood, a simple linear classifier like a Logistic Regression model trained on raw labels cannot capture the true probabilistic nature of expected goals (xG) without good managing of class imbalances and more complicated features.
+In conclusion, this baseline experiment indicates that while distance clearly influences goal likelihood, a simple linear classifier like a Logistic Regression model trained on raw labels cannot capture the true probabilistic nature of expected goals (xG) without good managing of class imbalances and more complicated feature engineering.
 
 ### 2. 
 
 After we have observed the downsides of the accuracy-based evaluation, we have shifted our focus to probability-based metrics to better understand the manner in how the model predicts expected goals. Using the predicted probabilities (predict_proba) from our logistic regression model, we produced four diagnostic plots to evaluate the respective calibration and discriminative power.
 
-![ROC FPR vs TPR Curve]({{ site.baseurl }}/assets/images/image-29.png)
+![ROC FPR vs TPR Curve]({{ site.baseurl }}/assets/images/image-30.png)
 
-a) The ROC curve (orange) lies consistently above the random baseline (blue dashed line), with an AUC = 0.690.
-This indicates that though the model has limited predictive strength, it is better than random guessing.
-Additionally, given that it relies on a single feature — distance from the net — the curve’s moderate shape reflects the common-sense relationship between proximity and goal likelihood: the closer the shot is to the goal, the higher the true-positive rate for a particular false-positive rate.
+a) The ROC curve (orange) lies consistently above the random baseline (blue dashed line), with an AUC = 0.70. This indicates that though the model has limited predictive strength, it is better than random guessing. Additionally, given that it relies on a single feature — distance from the net — the curve’s moderate shape reflects the common-sense relationship between proximity and goal likelihood: the closer the shot is to the goal, the higher the true-positive rate for a particular false-positive rate.
 
-![Goal Rate based on Predicted Probability Percentile]({{ site.baseurl }}/assets/images/image-30.png)
+![Goal Rate based on Predicted Probability Percentile]({{ site.baseurl }}/assets/images/image-31.png)
 
-b) The plot of goal rate by probability percentile displays a significant upward trend — the higher the predicted probability percentile leads to a higher goal rate.
-Ultimately, this confirms that the model’s probability outputs are meaningful: even if these are imperfectly calibrated, they increase monotonically with the goal rate.
+b) The plot of goal rate by probability percentile displays a significant upward trend — the higher the predicted probability percentile leads to a higher goal rate. The highest goal rate is 0.225 with a probability percentile of 100. This means that if the probability percentile or confidence of scoring is 100, the actual goal rate is 0.225. Ultimately, this confirms that the model’s probability outputs are meaningful: even if these are imperfectly calibrated, they increase monotonically with the goal rate.
 
 However, you can see some variation exists across percentiles, the general pattern confirms that the model captures that distance influences scoring probability. However, the curve’s fairly gradual slope also suggests that the model’s discrimination power is moderate — meaning it separates likely from unlikely goals, although imperfectly.
 
 In conclusion, the logistic regression model’s predicted probabilities does correlate positively with the actual goal frequency. This demonstrates that the baseline Logistic Regression Model effectively provides useful, though imperfectly calibrated, expected-goal estimates.
 
-![Cumulative Proportion of Goals vs Model Probability Percentile]({{ site.baseurl }}/assets/images/image-31.png)
+![Cumulative Proportion of Goals vs Model Probability Percentile]({{ site.baseurl }}/assets/images/image-32.png)
 
 c) The cumulative goal curve increases drastically as we increase the probability percentile, which displays that a relatively small fraction of top-scoring shots explain a large portion of all goals. These results imply that the logistic regression model can effectively rank shots by quality, which then identifies higher-probability events even if we have more limited information. This curve ultimately demonstrates that the logistic regression model effectively discriminates between high- and low-quality scoring opportunities, providing meaningful expected-goal estimates even if the logistic regression calibration is again not perfect.
 
 
-![Calibration Curve]({{ site.baseurl }}/assets/images/image-32.png)
+![Calibration Curve]({{ site.baseurl }}/assets/images/image-33.png)
 
 d) This given calibration curve indicates that predicted probabilities are centered near 0–0.2 and are close to the diagonal. This effectively means that the Logistic Regression model is well-calibrated within the lower-probability regions. However, because the given predicted values are already small, the model seems to underestimate the likelihood of rare goal events. This is another reflection of the dataset’s strong class imbalance.
 
@@ -147,33 +142,33 @@ Overall, these diagnostics and plots demonstrate that while the distance-only lo
 
 ### 3. 
 
-![ROC Curve for Logistic Regression Models]({{ site.baseurl }}/assets/images/image-33.png)
+![ROC Curve for Logistic Regression Models]({{ site.baseurl }}/assets/images/image-34.png)
 
-**ROC Curve for Logistic Regression Models on WANB**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/r01d0bhp)
+**ROC Curve for Logistic Regression Models on WANB**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/gnytvo3y)
 
-![Goal Rate Compared to given Model Percentile]({{ site.baseurl }}/assets/images/image-34.png)
+![Goal Rate Compared to given Model Percentile]({{ site.baseurl }}/assets/images/image-35.png)
 
-**Goal Rate Curve on WANB**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/blfsfei1)
+**Goal Rate Curve on WANB**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/4fx0steo)
 
-![Cumulative Number of Goal Compared to Cumulative Number of Shots]({{ site.baseurl }}/assets/images/image-35.png)
+![Cumulative Number of Goal Compared to Cumulative Number of Shots]({{ site.baseurl }}/assets/images/image-36.png)
 
-**Cumulative Goal Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/b1sin6i8)
+**Cumulative Goal Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/nc2ynvaz)
 
 ![Calibration Curve for Different Feature Combinations]({{ site.baseurl }}/assets/images/image-37.png)
 
 ![Calibration Curve for Different Feature Combinations Brier Score]({{ site.baseurl }}/assets/images/image-38.png)
 
-**Calibration Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/brvsei5q)
+**Calibration Curve**: [View Run Summary on W&B](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/428631wz)
 
 To test how certain geometric features contribute to scoring probability, we trained three Logistic Regression classifiers — one which only used distance, one which only used angles, and one which used distance and angles together — and compared these to a random baseline. Subsequently, the model’s outputs were evaluated with the same metrics as before: ROC curve (AUC), goal rate by percentile, and cumulative goal curve.
 
 **ROC Curve**
 
-As shown in the ROC comparison, the distance-only model achieved an AUC of 0.690, while the angle-only model performed worse at 0.565, indicating that distance is a much stronger single predictor of scoring likelihood. The combined distance + angle model reached the highest AUC of 0.708, confirming that angle adds complementary information about shot positioning. All three models performed well above the random baseline (AUC ≈ 0.49), demonstrating that even simple geometric inputs capture meaningful spatial structure in scoring events.
+As shown in the ROC comparison, the distance-only model achieved an AUC of 0.699, while the angle-only model performed worse at 0.572, indicating that distance is a much stronger single predictor of scoring likelihood. The combined distance + angle model reached the highest AUC of 0.718, confirming that angle adds complementary information about shot positioning. All three models performed well above the random baseline (AUC ≈ 0.50), demonstrating that even simple geometric inputs capture meaningful spatial structure in scoring events.
 
 **Goal Rate by Predicted Percentile**
 
-When shots were categorized by predicted probability percentile, the combined model of using both distance and angles showed the clearest monotonic relationship between model predictive probability and actual goal frequency. The distance-only curve generally followed a similar trend, while the angle-only model remained largely flat. This suggested that considering angle individually is less discriminative but can refine predictions if we use it in conjuction with distance.
+When shots were categorized by predicted probability percentile, the combined model of using both distance and angles showed the clearest monotonic relationship between model predictive probability and actual goal frequency with both feature combinations having an actual goal frequency of above 0.2 at the 100th percentile. The distance-only curve generally followed a similar trend, while the angle-only model remained largely flat and a goal rate staying around 0.15 at the 100th percentile. This suggested that considering angle individually is less discriminative but can refine predictions if we use it in conjuction with distance.
 
 **Cumulative Goal Proportion**
 
@@ -181,7 +176,7 @@ The cumulative goal plots reinforced the findings above: the combined distance a
 
 **Calibration Curve**
 
-The calibration curve illustrates how well the predicted goal probabilities align with actual outcomes across all four models. As shown, the distance + angle model (blue) lies closest to the diagonal, indicating the most reliable calibration and the lowest Brier score (≈ 0.081). Both distance-only (green) and angle-only (red) models show reasonable calibration but tend to slightly under-predict goal likelihoods at higher probability bins. The random baseline (orange) remains nearly flat, confirming it provides no informative signal. Overall, these results demonstrate that incorporating both distance and angle features produces a better-calibrated logistic regression model, where predicted probabilities meaningfully reflect real scoring frequencies.
+The calibration curve visualizes how closely the predicted goal probabilities match the actual scoring frequencies for each logistic regression model. As shown, the distance + angle model (blue) lies nearest to the diagonal line of perfect calibration, demonstrating the most reliable probability estimates and the lowest Brier score (~0.081). The distance-only (green) and angle-only (red) models exhibit moderate calibration, though both slightly underpredict goal likelihoods at higher probability ranges. In contrast, the random baseline (orange) remains nearly flat, confirming its lack of predictive value. Overall, these results indicate that combining spatial features—distance and angle—yields the best-calibrated model, where predicted probabilities accurately reflect real-world scoring chances.
 
 
 **Interpretation**

@@ -185,7 +185,7 @@ In conclusion, these comparisons indicate that the distance from the net is the 
 
 ## Feature Engineering II 
 
-![Tidy_Data_Updated]({{ site.baseurl }}/assets/images/image-36.png)
+![Tidy_Data_Updated]({{ site.baseurl }}/assets/images/image-39.png)
 
 **Feature Engineering II: Contextual and Power-Play Features**
 
@@ -204,15 +204,16 @@ The table below is the feature/column list of tidy_data_updated with a descripti
 8. shot_type: The given type of shot (e.g., wrist-shot, slap-shot, tip-in, etc.).
 9. is_goal: The	Binary indicator showing whether a goal was scored (1 = goal, 0 = no goal).
 10. empty_net: The indicator showing whether or not the net was empty:	1 if the shot was an empty net, else 0.
-11. last_event_type: The type of the preceding event in the hockey game (e.g., pass, rebound, block, hit).
-12. last_event_x_coord, 13. last_event_y_coord: The given x, y coordinates of the last recorded event.
-14. time_since_last_event: The number of seconds elapsed since the previous event.
-15. distance_from_last_event: The distance (in feet) between the last event and the current shot.
-16. rebound: Boolean column which is True if the last event was also a shot, indicating a rebound chance, false otherwise.
-17. change_in_shot_angle: The change in shot angle between the last and current events (in degrees).
-18. speed: The Average puck speed, computed as distance_from_last_event / time_since_last_event.
-19. time_since_power_play_start: The elapsed seconds since the start of a power-play; resets to 0 when the advantage ends.
-20. friendly_skaters, 21. opposing_skaters: The number of non-goalie skaters on each team, this accounts for specific penalties and power-play situations.
+11. season: Given NHL season for the particular game and event. 
+12. last_event_type: The type of the preceding event in the hockey game (e.g., pass, rebound, block, hit).
+13. last_event_x_coord, 14. last_event_y_coord: The given x, y coordinates of the last recorded event.
+15. time_since_last_event: The number of seconds elapsed since the previous event.
+16. distance_from_last_event: The distance (in feet) between the last event and the current shot.
+17. rebound: Boolean column which is True if the last event was also a shot, indicating a rebound chance, false otherwise.
+18. change_in_shot_angle: The change in shot angle between the last and current events (in degrees).
+20. speed: The Average puck speed, computed as distance_from_last_event / time_since_last_event.
+21. time_since_power_play_start: The elapsed seconds since the start of a power-play; resets to 0 when the advantage ends.
+22. friendly_skaters, 21. opposing_skaters: The number of non-goalie skaters on each team, this accounts for specific penalties and power-play situations.
 
 **Summary and Insights**
 
@@ -220,7 +221,7 @@ These engineered features transform the dataset with temporal flow, event sequen
 Specifically, features like rebound, speed, and change_in_shot_angle measure the danger of the shot subsequent to following prior plays, while the power-play indicators (time_since_power_play_start, friendly_skaters, opposing_skaters) indicate how these given situations influence goal probability.
 This modified dataset gives a good foundation for training more complex expected goals (xG) models which are capable of reflecting complete dynamics of NHL end-to-end play sequences.
 
-**Tidy Data Updated Table W&B link:** [View 2017 NHL Game Dataset on W&B](https://wandb.ai/IFT6758-2025-B08/my_project/artifacts/dataset/wpg_v_wsh_2017021065/v3/files/wpg_v_wsh_2017021065.table.json)
+**Tidy Data Updated Table W&B link:** [View 2017 NHL Game Dataset on W&B](https://wandb.ai/IFT6758-2025-B08/my_project/artifacts/dataset/wpg_v_wsh_2017021065/v4/files/wpg_v_wsh_2017021065.table.json)
 
 
 ## Advanced Models

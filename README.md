@@ -29,9 +29,7 @@ Follow these steps to reproduce the environment and run both the notebook and th
 
     git clone https://github.com/LuciusH1998/IFT-6758-Group-8-Milestone-1.git
     cd IFT-6758-Group-8-Milestone-1
-    cd ift6758
     cd src
-
 
 ## Create and Activate a virtual Environment
 
@@ -72,5 +70,4 @@ http://127.0.0.1:4000
 
 or directly to your post:
 
-http://127.0.0.1:4000/data%20science/nhl/python/2025/10/04/nhl-play-by-play-analysis.html
-
+http://127.0.0.1:4000/data%20science/nhl/python/2025/11/07/nhl-play-by-play-analysis-milestone-2.html

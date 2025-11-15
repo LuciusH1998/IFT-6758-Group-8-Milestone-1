@@ -234,22 +234,15 @@ In this section, we advanced beyond the baseline Logistic Regression to build **
 
 ### Q1 — Baseline XGBoost (Distance & Angle Only)
 
-The first step was to train a **baseline XGBoost model** using only the `shot_distance` and `shot_angle` features.  
-This model served as a comparison to the fully tuned models trained later with the complete feature set.
+Using the transformed tidy data, we proceeded to split the tidy data into a training and validation set to evaluate the effectiveness of the XGBoost baseline classifier. The first step was to train a **baseline XGBoost model** using only the `shot_distance` and `shot_angle` features.  This model served as a comparison to the Logistic Regression baseline model defined in section 3, and other fully tuned models trained later with the complete feature set.
 
-**Training setup:**
-- X Train shape: (262,686 × 2)
-- y train shape: (65,672 × 2)
-- X val shape: (262,686)
-- y val shape: (65,672)
+Note in section 5 in order to ensure testing could be completed in a timely manner that minimized memory usage and computation cost, the training and validation sets used in section 5 comprised 10% of the entire transformed tidy data which 5 seasons worth of NHL data. 
+
 - Optimizer: `XGBoostClassifier` (default parameters)
 - Evaluation metric: `roc_auc`, goal rate curve, cumulative goal rate, and reliability curve 
 
 **Results:**
-- Validation Accuracy: **0.90524**
-- Validation AUC: **0.7171**
-
-These results already surpassed Logistic Regression's baseline model where the AUC is 0.699 from Task 3, showing XGBoost’s strength in capturing nonlinear patterns in comparison to Logistic Regression. In summary, Logistic Regression is a worse classifier for expected goals than XGBoost. 
+- Validation AUC: **0.664**
 
 **Visualizations:**
 
@@ -258,9 +251,13 @@ These results already surpassed Logistic Regression's baseline model where the A
 ![Baseline XGBoost Cumulative Goal Rate Curve]({{ site.baseurl }}/assets/images/image-42.png)
 ![Baseline XGBoost Reliability Curve]({{ site.baseurl }}/assets/images/image-43)
 
-**WandB Run:** [View Baseline XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2)
+**WandB Run:** [View Baseline XGBoost Experiment]( https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/funh0so2)
 
+**Analysis**
 
+Suprisingly, the XGB AUC of 0.664 is smaller in comparison to the Logistic Regression's baseline model, where the AUC is 0.699 from Task 3. This shows XGBoost’s comparative lack of strength in capturing nonlinear patterns in comparison to Logistic Regression. In summary, prior to more sophisticated hyper parameter tuning and feature selection, XGBoost performs worse as an Expected Goal classifier than Logistic Regression. This could be derived from the smaller number of training samples used to train XGBoost baseline compared to that of Logistic Regression's baseline, or XGBoost's baseline being more sensitive to the class imbalance compared to Logistic Regression. 
+
+With respect to the Goal Rate and Cumulative Goal curve, the general monotonically increasing trend which aligns with that of the Logistic Regression. However, the graphs are overall less smooth than the curves of Logistic Regression. The higher the probability percentile, the higher the goal scoring rate. The Calibration tool for distance and angle is initially close to the perfect classifier but diverges above and away the perfectly calibrated curve for larger probability percentiles. These all reinforce that the XGBoost is a better than random but an imperfect classifier for Expected Goals possibly due to the sensitivity of a serious class imbalance. 
 
 ### Q2 — XGBoost with All Features and Hyperparameter Tuning
 

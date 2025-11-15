@@ -60,7 +60,8 @@ After making sure that the newly created virtual environment has been selected a
 ### Serve the Jekyll Blog Locally
 
 To preview the project blog locally, navigate to the blog folder and start the Jekyll server:
-
+    
+    cd src
     cd myblog
     bundle exec jekyll serve
 

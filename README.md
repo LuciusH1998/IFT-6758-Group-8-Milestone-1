@@ -8,21 +8,19 @@ The project demonstrates key data science concepts such as:
 - Using Feature Engineering and Machine Learning to analyze key metrics used to predict expected goals
 - Continue with visualizations and other statistical analysis of influential features on scoring hockey goals 
 - Building reproducible environments for collaboration and deployment  
-<p align="center">
-<img src="./figures/nhl_rink.png" alt="NHL Rink is 200ft x 85ft." width="400"/>
-<p>
 
-**Directory overview:**
-Each folder serves a specific purpose:
+**milestone2 overview:**
+Each folder within the milestone2 branch serves a specific purpose:
 
-- **`ift6758/`**: Main package directory containing source files, notebooks, and blog content  
-  - **`src/`**: Core working directory for scripts, data, and Jupyter notebooks  
+- **`src/`**: Main branch folder containing code, blog content, and other keys files  
   - **`myblog/`**: Contains `_posts/`, configuration files, and assets for the Jekyll site  
-  - **`_site/`**: Automatically generated output folder created by the Jekyll build process  
+  - **`milestone2.ipynb/`**: Contains main code file for Milestone 2   
+  - **`requirements.txt`**: Text file which contains all requirements for packages and libraries needed to run milestone2.ipynb
 
 - **`README.md`** — This file
-- **`environments.yml`**
-- **`gitignore.txt`**
+- **`environments.yml`** - Defines all the dependencies and Python version needed to recreate your project’s Conda environment.
+- **`gitignore.txt`** - Tells Git which files and folders to skip when tracking or committing changes.
+- **`setup.py`** - Specifies how to install your project as a Python package, including its dependencies and metadata.
 
 
 ## Set up Instructions (Python version == 3.13.3)

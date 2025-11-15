@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "NHL Play-by-Play Data Analysis"
+title: "NHL Play-by-Play Data Analysis Milestone 1"
 date: 2025-10-04
 categories: [Data Science, NHL, Python]
 author: Lucius Hatherly (lucius.hatherly@umontreal.ca), Sina Vali (Sina.vali@umontreal.ca), Aymen Boustani (aymen.boustani@umontreal.ca), Shivam Ardeshna (shivam.mayurbhai.ardeshna@umontreal.ca)

@@ -7,7 +7,8 @@ The project demonstrates key data science concepts such as:
 - Extracting and processing NHL play-by-play data
 - Using Feature Engineering and Machine Learning to analyze key metrics used to predict expected goals
 - Continue with visualizations and other statistical analysis of influential features on scoring hockey goals 
-- Building reproducible environments for collaboration and deployment  
+- Building reproducible environments for collaboration and deployment
+- Using WANDB to track all experiments and images outputed in the key. The WANDB API key to enter when prompted in the code to enable this tracking is **50c6486ca894b323e5061c4513b477036ac87f8a**
 
 **milestone2 overview:**
 Each folder within the milestone2 branch serves a specific purpose:

@@ -251,10 +251,10 @@ Note in section 5 in order to ensure testing could be completed in a timely mann
 ![Baseline XGBoost Cumulative Goal Rate Curve]({{ site.baseurl }}/assets/images/image-42.png)
 ![Baseline XGBoost Reliability Curve]({{ site.baseurl }}/assets/images/image-43.png)
 
-**WandB Run:** [View Baseline XGBoost AUC](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/soiflbit)
-**WandB Run:** [View Baseline XGBoost Goal Rate Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/5vgwclnq)
-**WandB Run:** [View Baseline XGBoost Cumulative Goal Rate Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/acq0dg4p)
-**WandB Run:** [View Baseline XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/funh0so2)
+-**WandB Run:** [View Baseline XGBoost AUC](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/soiflbit)
+-**WandB Run:** [View Baseline XGBoost Goal Rate Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/5vgwclnq)
+-**WandB Run:** [View Baseline XGBoost Cumulative Goal Rate Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/acq0dg4p)
+-**WandB Run:** [View Baseline XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/funh0so2)
 
 **Analysis**
 

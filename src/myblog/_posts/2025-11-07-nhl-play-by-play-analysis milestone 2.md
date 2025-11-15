@@ -280,8 +280,6 @@ eval_metric = logloss
 
 **Best Cross Validation Accuracy**: 0.8214590354826432
 
-**WandB Run:** [View XGBoost Optimal Parameters](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/eqp4hfry)
-
 ![Optimal Parameters XGBoost (AUC)]({{ site.baseurl }}/assets/images/image-44.png)
 
 ![Optimal Parameters XGBoost Goal Rate Curve]({{ site.baseurl }}/assets/images/image-45.png)
@@ -294,53 +292,28 @@ After hyperparameter tuning, we can see that the best cross validation AUC for X
 
 ### Q3 — Feature Selection and Model Simplification
 
-Once the tuned model was established, we explored **feature selection** to simplify the model without losing performance.  
-We used:
+![Recursive Feature Elimination with Correlated Features]({{ site.baseurl }}/assets/images/image-48.png)
 
-- **ANOVA F-test** for statistical significance ranking  
-- **SHAP importance** to interpret how much each feature contributes to predictions  
+![Feature Importance via Coefficients]({{ site.baseurl }}/assets/images/image-49.png)
 
-**Visualizations:**
+![Feature Importance via MDI]({{ site.baseurl }}/assets/images/image-50.png)
 
-![Top Feature Importance (XGBoost)]({{ site.baseurl }}/assets/images/top_feature_importance.jpg)
-![Top Features by ANOVA]({{ site.baseurl }}/assets/images/top_features_annova.jpg)
+![SHAP Graph]({{ site.baseurl }}/assets/images/image-51.png)
 
-The analysis confirmed that:
-- **Shot Distance**, **Shot Angle**, and **Rebound indicators** were dominant features.
-- Features like `last_event_type`, `time_since_last_event`, and `xG_diff` added only marginal performance.
+**WandB Run:** [View XGBoost Optimal Parameters ROC Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/7e6usrc3)
 
-After retraining with only top-ranked features:
-- **AUC:** 0.754 (vs 0.757 with all features)
-- **Accuracy:** 0.906 (vs 0.908)
-- **Model size reduced by:** ~25%
-- **Inference speed improved by:** +30%
+**WandB Run:** [View XGBoost Optimal Goal Rate Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/w5qpsrrr)
 
-**WandB Run:** [View Feature-Selected XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2)
+**WandB Run:** [View XGBoost Cumulative Goal Rate Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/xvo1su3s)
 
+**WandB Run:** [View Calibration Curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/geor8nf8)
 
+To simplify the input feature space and reduce redundancy, several feature selection and interpretability techniques were applied, including Recursive Feature Elimination (RFE), coefficient-based importance, Mean Decrease in Impurity (MDI), and SHAP analysis. RFE results showed that test accuracy stabilized after roughly 5–10 features, suggesting that only a small subset of variables carried meaningful predictive information. Coefficient and MDI analyses consistently ranked shot_distance, shot_angle, empty_net, and contextual variables like game_period and time_since_last_event as the strongest predictors of scoring likelihood.
 
-### Final Summary
+The SHAP feature impact plot further confirmed these findings—shot_distance had the most substantial negative effect on predicted goal probability (closer shots increased scoring chances), while empty_net and shot_angle had positive contributions. Contextual features such as game_seconds and last_event_type_penalty provided situational context that slightly refined predictions. These results highlight that shot geometry and situational context drive goal probability far more than other event-based variables.
 
-| Step | Description |
-|------|--------------|
-| **Model** | XGBoost (baseline → tuned → feature-selected) |
-| **Validation Accuracy (final)** | 0.908 |
-| **Validation AUC (final)** | 0.758 |
-| **Key Features** | Distance, Angle, Rebound Indicators, Shot Type |
-| **Key Improvements** | Calibration, Reliability, ROC Curve, Feature Interpretability |
-| **Tools Used** | Matplotlib, Seaborn, Scikit-learn, SHAP, WandB |
-| **Model Registry** | All experiments logged to WandB Model Registry |
+After applying these feature selection techniques, the final XGBoost model retained only the most influential variables. Importantly, the optimal hyperparameters matched those found in Q2, indicating model stability across feature subsets. The reduced-feature XGBoost model achieved an AUC of 0.811, identical to the full model, confirming that dimensionality reduction preserved predictive performance while improving interpretability and computational efficiency.
 
-
-
-### Key Takeaways
-
-- Adding engineered features and applying GridSearch-based tuning substantially improved model performance.
-- Calibration enhanced probability reliability, making the model suitable for downstream decision-making.
-- Feature importance and ANOVA tests provided valuable insights into what drives successful goal predictions.
-- The final model achieved **0.908 Accuracy** and **0.7577 AUC**, marking a significant leap over earlier baselines.
-
-This task demonstrates how **advanced optimization and interpretability** combine to produce a reliable, explainable, and production-ready predictive model for hockey shot outcomes.
 ## Give it your best shot!
 
 ## Evaluate on test set! 

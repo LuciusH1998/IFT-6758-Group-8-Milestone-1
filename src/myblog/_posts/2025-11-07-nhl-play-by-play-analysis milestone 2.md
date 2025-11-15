@@ -99,7 +99,7 @@ All in all, these results show the importance of spatial dependency of shot qual
 In order to verify the data quality and guarantee realistic shot coordinates, the goal events separated into bins as empty-net and non-empty-net categories were examined. The histogram displays that non-empty-net goals are located between 0–40 ft, this averages around 21.69 ft, and we see that empty-net goals occur a considerable distance farther out, averaging at around 44.3 ft and extending all the way up to around 98 ft. 
 From the graph we can see that no non-empty-net goals surpass the cutoff threshold of 110 ft. This confirms that the recorded goals are all located within the real-life common sense on-ice distances.
 
-Essentially, a review of potential outliers found no real anomalies in the coordinate data or given shot type. We can see that occaisional long-range non-empty-net goals were were rare events in a hockey game (e.g., rebounds or delayed-penalty situations) compared to incorrect data errors.
+Essentially, a review of potential outliers found no real anomalies in the coordinate data or given shot type. We can see that occaisional long-range non-empty-net goals were rare events in a hockey game (e.g., rebounds or delayed-penalty situations) compared to incorrect data errors.
 
 Overall, the histogram distribution connects with common sense hockey logic: close-range shots seriously dominate non-empty-net goals. We also see long-range shots are virtually entirely empty-net situations. This confirms that the engineered distance and event-type features are reliable and consistent.
 

@@ -1,11 +1,12 @@
-# IFT6758 Project Milestone 1
+# IFT6758 Project Milestone 2
 
-This repository contains the code and assets for the IFT6758 NHL Play-by-Play Analysis project.  
-It includes both the main analytical notebook (`milestone1.ipynb`) and a Jekyll-based blog (`myblog`) used to showcase results.
+This branch contains the code and assets for the IFT6758 NHL Play-by-Play Analysis project Milestone 2.  
+It includes both the main analytical notebook (`milestone2.ipynb`) and a Jekyll-based blog (`myblog`) used to showcase results.
 
 The project demonstrates key data science concepts such as:
-- Extracting and processing NHL play-by-play data  
-- Visualizing hockey rink and game statistics  
+- Extracting and processing NHL play-by-play data
+- Using Feature Engineering and Machine Learning to analyze key metrics used to predict expected goals
+- Continue with visualizations and other statistical analysis of influential features on scoring hockey goals 
 - Building reproducible environments for collaboration and deployment  
 <p align="center">
 <img src="./figures/nhl_rink.png" alt="NHL Rink is 200ft x 85ft." width="400"/>

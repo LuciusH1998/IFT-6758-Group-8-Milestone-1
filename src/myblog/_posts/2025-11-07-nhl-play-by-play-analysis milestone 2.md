@@ -328,7 +328,7 @@ The results are as follows:
 ![ROC curve]({{ site.baseurl }}/assets/images/img1.png)
 ![Goal rate by probability percentile curve]({{ site.baseurl }}/assets/images/img2.png)
 ![Cumulative goals by probability percentile curve]({{ site.baseurl }}/assets/images/img3.png)
-![Calibration curve]({{ site.baseurl }}/assets/images/img4.png) 
+![Calibration curve]({{ site.baseurl }}/assets/images/img4.png)<br>
 **WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/68iuetrf)<br>
 **WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/6dchl54t)<br>
 **WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/v786jsu2)<br>
@@ -338,52 +338,64 @@ The results are as follows:
 
 **KNN model:**
 
-**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/q4xdubw3)
+
 
 ![ROC curve]({{ site.baseurl }}/assets/images/img5.png)
-**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/9wndfi7m)
+
 
 ![Goal rate by probability percentile curve]({{ site.baseurl }}/assets/images/img6.png)
-**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/xt601bkw)
+
 
 ![Cumulative goals by probability percentile curve]({{ site.baseurl }}/assets/images/img7.png)
-**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/dmalxrx7)
 
-![Calibration curve]({{ site.baseurl }}/assets/images/img8.png) 
-**WandB Run:** [View Calibration curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/n94g9h0z)
+
+![Calibration curve]({{ site.baseurl }}/assets/images/img8.png)<br>
+**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/q4xdubw3)<br>
+**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/9wndfi7m)<br>
+**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/xt601bkw)<br>
+**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/dmalxrx7)<br>
+**WandB Run:** [View Calibration curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/n94g9h0z)<br>
 
 
 **Random forest model:**
 
-**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/e69e50jy)
+
 
 ![ROC curve]({{ site.baseurl }}/assets/images/img9.png)
-**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/6x7mdv7m)
+
 
 ![Goal rate by probability percentile curve]({{ site.baseurl }}/assets/images/img10.png)
-**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/bcflkmrb)
+
 
 ![Cumulative goals by probability percentile curve]({{ site.baseurl }}/assets/images/img11.png)
-**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/52y4soa0)
 
-![Calibration curve]({{ site.baseurl }}/assets/images/img12.png) 
+
+![Calibration curve]({{ site.baseurl }}/assets/images/img12.png)<br>
+**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/e69e50jy)<br>
+**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/6x7mdv7m)<br>
+**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/bcflkmrb)<br>
+**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/52y4soa0)<br>
 **WandB Run:** [View Calibration curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/tdte8gdz)
 
 
 **Neural network model:**
 
-**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/1s32hvp2)
+
 
 ![ROC curve]({{ site.baseurl }}/assets/images/img13.png)
-**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/1co81jnl)
+
 
 ![Goal rate by probability percentile curve]({{ site.baseurl }}/assets/images/img14.png)
-**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/wzdwfepa)
+
 
 ![Cumulative goals by probability percentile curve]({{ site.baseurl }}/assets/images/img15.png)
-**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/hb8bhld5)
 
-![Calibration curve]({{ site.baseurl }}/assets/images/img16.png) 
+
+![Calibration curve]({{ site.baseurl }}/assets/images/img16.png)<br>
+**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/1s32hvp2)<br>
+**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/1co81jnl)<br>
+**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/wzdwfepa)<br>
+**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/hb8bhld5)<br>
 **WandB Run:** [View Calibration curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/rxu0hqes)
 
 Out of the four models in this section, logistic regression had the best performance with an AUC score of 0.767

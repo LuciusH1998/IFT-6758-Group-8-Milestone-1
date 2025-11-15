@@ -325,19 +325,14 @@ We have considered four models for this section: logisitic regression, with regu
 The results are as follows:
 
 **Logistic regression model:**
-
-**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/68iuetrf)
-
 ![ROC curve]({{ site.baseurl }}/assets/images/img1.png)
-**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/6dchl54t)
-
 ![Goal rate by probability percentile curve]({{ site.baseurl }}/assets/images/img2.png)
-**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/v786jsu2)
-
 ![Cumulative goals by probability percentile curve]({{ site.baseurl }}/assets/images/img3.png)
-**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/d3piozyb)
-
 ![Calibration curve]({{ site.baseurl }}/assets/images/img4.png) 
+**WandB Run:** [View quantitative metrics](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/68iuetrf)<br>
+**WandB Run:** [View ROC curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/6dchl54t)<br>
+**WandB Run:** [View Goal rate by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/v786jsu2)<br>
+**WandB Run:** [View Cumulative goals by probability percentile curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/d3piozyb)<br>
 **WandB Run:** [View Calibration curve](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/nazwc5o2)
 
 

@@ -249,7 +249,7 @@ Note in section 5 in order to ensure testing could be completed in a timely mann
 ![Baseline XGBoost (AUC)]({{ site.baseurl }}/assets/images/image-40.png)
 ![Baseline XGBoost Goal Rate Curve]({{ site.baseurl }}/assets/images/image-41.png)
 ![Baseline XGBoost Cumulative Goal Rate Curve]({{ site.baseurl }}/assets/images/image-42.png)
-![Baseline XGBoost Reliability Curve]({{ site.baseurl }}/assets/images/image-43)
+![Baseline XGBoost Reliability Curve]({{ site.baseurl }}/assets/images/image-43.png)
 
 **WandB Run:** [View Baseline XGBoost Experiment]( https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/funh0so2)
 
@@ -261,75 +261,36 @@ With respect to the Goal Rate and Cumulative Goal curve, the general monotonical
 
 ### Q2 — XGBoost with All Features and Hyperparameter Tuning
 
-We next trained an **XGBoost classifier** using all engineered features (26 total) and applied **GridSearchCV** for fine-tuned optimization.
-
-**Dataset dimensions:**
-- Training: (1,319,337 × 26)
-- Validation: (329,835 × 26)
+We next trained an **XGBoost classifier** using all 22 engineered tidy updated features and applied **GridSearchCV** for fine-tuned optimization, and evaluated the tuned Hyperparameters on the validation set.
 
 **Grid Search Parameters:**
 
 | Hyperparameter | Tested Range |
 |----------------|---------------|
 | `learning_rate` | [0.01, 0.05, 0.1] |
-| `max_depth` | [5, 7] |
-| `n_estimators` | [100, 200] |
-| `colsample_bytree` | [0.8] |
-| `subsample` | [0.8] |
-| `min_child_weight` | [1] |
+| `max_depth` | [1, 3, 5] |
+| `n_estimators` | [100, 200, 300] |
+| `eval_metric` | [logloss, auc] |
 
 **Best Configuration:**
-colsample_bytree = 0.8
 learning_rate = 0.05
 max_depth = 5
-min_child_weight = 1
-n_estimators = 200
-subsample = 0.8
-Best CV AUC = 0.7576
-Validation AUC = 0.7577
-Validation Accuracy = 0.9083
+n_estimators = 100
+eval_metric = logloss
 
+**Best Cross Validation Accuracy**: 0.8214590354826432
 
-This model showed strong generalization while avoiding overfitting at higher tree depths.
+**WandB Run:** [View XGBoost Optimal Parameters](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/eqp4hfry)
 
-![Performance vs Model Complexity]({{ site.baseurl }}/assets/images/performance_model_complexity.jpg)
+![Optimal Parameters XGBoost (AUC)]({{ site.baseurl }}/assets/images/image-44.png)
 
+![Optimal Parameters XGBoost Goal Rate Curve]({{ site.baseurl }}/assets/images/image-45.png)
 
+![Optimal Parameters XGBoost Cumulative Goal Curve]({{ site.baseurl }}/assets/images/image-46.png)
 
-### Probability Calibration and Reliability
+![Optimal Parameters XGBoost Cumulative Goal Curve]({{ site.baseurl }}/assets/images/image-47.png)
 
-After tuning, the model’s output probabilities were **calibrated using Isotonic Regression**.  
-Calibration helps ensure that the predicted probabilities better represent true likelihoods.
-- **Baseline AUC:** ~0.71  
-- **Optimized AUC:** ~0.7576  
-- Improved discrimination and more stable probability outputs were observed.
-
-![Calibration Plot for XGBoost]({{ site.baseurl }}/assets/images/q3_calibration.jpg)
-![Reliability Curve (XGBoost - Q1)]({{ site.baseurl }}/assets/images/reliability_curve_xgb_q1.jpg)
-
-> A well-calibrated model ensures that when it predicts a 0.7 goal probability, it truly reflects a 70% real-world goal rate.
-
----
-
-### ROC Comparison Across Models
-
-We compared ROC curves across all models — Logistic Regression, Neural Network, and XGBoost.  
-The **tuned XGBoost** consistently dominates the upper-left quadrant, confirming its superior ability to distinguish between goals and no-goals.
-
-![ROC Comparison]({{ site.baseurl }}/assets/images/roc_comparison.jpg)
-
-**Performance Comparison:**
-
-| Metric | Logistic Regression | Neural Network | XGBoost (Tuned) |
-|---------|----------------------|----------------|-----------------|
-| **Accuracy** | 0.785 | 0.791 | 0.908 |
-| **AUC** | 0.702 | 0.734 | 0.758 |
-| **Precision** | 0.16 | 0.19 | 0.21 |
-| **Recall** | 0.39 | 0.45 | 0.47 |
-| **F1 Score** | 0.23 | 0.27 | 0.29 |
-
-**WandB Run:** [View Tuned XGBoost Experiment](https://wandb.ai/IFT6758-2025-B08/IFT6758-Milestone2/runs/66fc753h)
-
+After hyperparameter tuning, we can see that the best cross validation AUC for XGBoost is 0.82, far better than that of any of the Logistic Regression baseline models and the XGBoost baseline. Moreover, the hyperparameter tuned XGBoost with optimized selected features has a signficantly better AUC curve of 0.811 than the XGBoost and Logistic Regression baselines. In addition, the Goal Rate curve, Cumulative Goal curve, and Calibration curve all further show trends and figures that are better predictors for exepected goals than the baseline XGBoost and Logistic Regression models. This indicates that post hyperparameter tuning, if we optimized learning rate, max_depth, n_estimators, and eval_metric then we can see that the XGBoost will be a better classifier for expected goals. 
 
 ### Q3 — Feature Selection and Model Simplification
 

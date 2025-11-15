@@ -45,7 +45,7 @@ We’ll use venv for simplicity. From inside the src directory:
     
 This will install all Python dependencies required for the notebook and analysis.
 
-### Run the milestone1.ipynb notebook
+### Run the milestone2.ipynb notebook
 
 Launch Jupyter Lab or Notebook and open milestone1.ipynb:
 

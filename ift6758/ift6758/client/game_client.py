@@ -2,6 +2,7 @@
 import requests 
 import pandas as pd 
 import logging 
+import numpy as np
 from typing import Dict, List, Optional
 
 # Defining Logger 
@@ -83,21 +84,100 @@ class GameClient:
 
         return updated_df
     
+    @staticmethod
+    def compute_distance_angle(x, y):
+        """
+        Net assumed at (89, 0) like Milestone 2.
+        Method is identical to Milestone 2. 
+        """
+        x_net, y_net = 89, 0
+        dx = x_net - x
+        dy = y_net - y
+        dist = np.sqrt(dx ** 2 + dy ** 2)
+        ang = np.degrees(np.arctan2(abs(dy), abs(dx)))
+        return dist, ang
+    
+    def process_events(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Computes:
+        - standardized x,y
+        - distance_from_net
+        - angle_from_net
+        - is_goal
+        - empty_net
+        Method is identical to Milestone 2. 
+        """
+
+        if df.empty:
+            return df
+        
+        # Correct IDs will be attached in extract() below.
+
+        # Standardize direction
+        df["x_std"] = np.where(df["details.xCoord"] < 0,
+                              -df["details.xCoord"],
+                               df["details.xCoord"])
+
+        df["y_std"] = np.where(df["details.xCoord"] < 0,
+                              -df["details.yCoord"],
+                               df["details.yCoord"])
+
+        # Compute distance + angle
+        df["distance_from_net"] = None
+        df["angle_from_net"] = None
+
+        for idx, row in df.iterrows():
+            dist, ang = self.compute_distance_angle(row["x_std"], row["y_std"])
+            df.at[idx, "distance_from_net"] = dist
+            df.at[idx, "angle_from_net"] = ang
+
+        # is_goal
+        df["is_goal"] = (df["typeDescKey"] == "goal").astype(int)
+
+        # empty net (use situationCode)
+        def compute_empty(row):
+            code = row.get("details.situationCode", None)
+            owner = row.get("eventOwnerTeamId", None)
+
+            # assume missing code => 0
+            if pd.isna(code) or not isinstance(code, str) or len(code) != 4:
+                return 0
+
+            away_goalie = int(code[0])
+            home_goalie = int(code[3])
+
+            # if the scoring team has NO goalie on ice, this is an empty net goal
+            # eventOwnerTeamId == home team, then check home_goalie
+            if row["is_goal"] == 1:
+                if owner == row.get("homeTeamId") and home_goalie == 0:
+                    return 1
+                if owner == row.get("awayTeamId") and away_goalie == 0:
+                    return 1
+            return 0
+
+        df["empty_net"] = df.apply(compute_empty, axis=1)
+
+        return df
+
     def extract(self) -> pd.DataFrame:
         """
-        Fetching json and returning unseen hockey events
+        Get unseen events, attach the relevant team IDs, and then compute features
         """
+        # Defining Data with obtain_game
         data = self.obtain_game()
-        unseen_events = self.extract_new_events(data)
-        return unseen_events 
+        # Extracting new events and assigning it to unseen
+        unseen = self.extract_new_events(data)
 
+        if unseen.empty:
+            return unseen
 
+        # Attach home/away team IDs
+        home_id = data.get("homeTeam", {}).get("id", None)
+        away_id = data.get("awayTeam", {}).get("id", None)
+
+        unseen["homeTeamId"] = home_id
+        unseen["awayTeamId"] = away_id
         
-
-
-
-
-
-
-
-        
+        # Creating the necessary features 
+        processed = self.process_events(unseen)
+        return processed

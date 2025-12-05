@@ -39,24 +39,8 @@ app = Flask(__name__)
 def get_latest_artifact_version(api, model_name):
     """
     Retrieving the latest version of the given model artifact.
+    Uses artifact_type() and collections(), fully compatible with all WandB versions.
     """
-    try:
-        # WandB automatically resolves 'latest' to the newest version
-        artifact_path = f"{PROJECT_PATH}/{model_name}:latest"
-        artifact = api.artifact(artifact_path)
-        return f"{model_name}:{artifact.version}"
-    except Exception as e:
-        # If 'latest' doesn't exist, try v0, v1, v2, etc.
-        app.logger.warning(f"'latest' alias not found, trying version numbers: {e}")
-        for version_num in range(20, -1, -1):  # Try v20 down to v0
-            try:
-                test_path = f"{PROJECT_PATH}/{model_name}:v{version_num}"
-                artifact = api.artifact(test_path)
-                return f"{model_name}:v{version_num}"
-            except:
-                continue
-        raise ValueError(f"No versions found for model '{model_name}'")
-
     # Get the artifact type object
     artifact_type_obj = api.artifact_type("model", PROJECT_PATH)
     # Retrieve all collections under this type

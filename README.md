@@ -262,7 +262,7 @@ We should expect a probability value returned here
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method POST -ContentType "application/json" -Body '{"angle_from_net":[30]}'
 ```
 
-For the rest of the testing, please complete the rest of the commands in Section 2 Test Script.ps1. Note you can also modify the testing commands as you see fit to ensure everything is working. 
+For the rest of the testing, please complete the rest of the commands in Section 2 Test Script.ps1. Note you can also modify the testing commands as you see fit to ensure everything is working. Once you are finished with the testing, you can press control +c in the vs code which is running the flask app. 
 
 ## Testing Serving and Game Client (Section 3)
 
@@ -281,12 +281,26 @@ HOW TO RUN:
    ```
    cd client (or given client path folder)
    ```
-5. Then
+4. Then
    ```
    execute: python test_client.py
    ```
-   You can modify the test commands as you see fit to ensure the code is functioning smoothly. 
+   You can modify the test commands as you see fit to ensure the code is functioning smoothly.
 
+To test the game_client file, follow these instructions below:
+
+1. Open a second VS code terminal, and in your second VS code Terminal, access the client folder with:
+   ```
+   cd client (or given client path folder)
+   ```
+5. Then
+   ```
+   execute: python test_gclient.py
+   ```
+   You can modify the test commands as you see fit to ensure the code is functioning smoothly.
+
+   Once you are finished with the testing, you can press control +c in the vs code which is running the flask app. 
+   
 ## Streamlit
 
 Streamlit can be installed using:

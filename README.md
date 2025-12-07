@@ -289,6 +289,11 @@ For the rest of the testing, please complete the rest of the commands in Section
 To test the **serving_client file**, follow these instructions below:
 
 HOW TO RUN:
+
+First ensure your virtual environments and requirements are downloaded with the instruction specified in section 2 (Flask app).
+
+Then run these commands: 
+
 1. In VS Code, within your first Terminal, access the serving folder with:
    ```
      cd serving or (correct serving path for your downloaded folder)

@@ -229,30 +229,38 @@ Note this presumes you run the test on windows, UBUNTU will need CURL commands
 First access the serving folder with the commands cd serving 
 
 In the first VS Code Terminal, run line below 
+```
 python -m waitress --listen=0.0.0.0:5000 app:app
+```
 
-# Create a new terminal and execute the following commands 
-# Test logs
-# Outputs message indicating successful loading of default model logreg_distance
-# First few commands may fail due to server not being fully connected yet
-# However, API call should execute properly after 2 to 3 minutes in the worst-case scenario
+Create a new terminal and execute the following commands 
+Test logs
+Outputs message indicating successful loading of default model logreg_distance
+First few commands may fail due to server not being fully connected yet
+However, API call should execute properly after 2 to 3 minutes in the worst-case scenario
+```
 Invoke-WebRequest -Uri "http://127.0.0.1:5000/logs" | Select-Object -ExpandProperty Content
+```
 
-# Test default distance model, we should expect a probability value returned 
+Test default distance model, we should expect a probability value returned 
+```
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method POST -ContentType "application/json" -Body '{"distance_from_net":[20]}'
+```
 
-# Wrong field test, we should expect an error which indicates incorrect field inputted. 
+Wrong field test, we should expect an error which indicates incorrect field inputted. 
+```
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method POST -ContentType "application/json" -Body '{"angle_from_net":[30]}'
+```
 
-# Switch to angle model, we should expect a successful switch to new model message  
+Switch to angle model, we should expect a successful switch to new model message  
+```
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/download_registry_model" -Method POST -ContentType "application/json" -Body '{"model":"logreg_angle","version":"latest"}'
+```
 
-# We should expect a probability value returned here 
+We should expect a probability value returned here 
+```
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method POST -ContentType "application/json" -Body '{"angle_from_net":[30]}'
-
-
-
-
+```
 
 ## Streamlit
 

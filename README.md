@@ -266,7 +266,7 @@ For the rest of the testing, please complete the rest of the commands in Section
 
 ## Testing Serving and Game Client (Section 3)
 
-To test the serving_client file, follow these instructions below:
+To test the **serving_client file**, follow these instructions below:
 
 HOW TO RUN:
 1. In VS Code, within your first Terminal, access the serving folder with:
@@ -287,7 +287,7 @@ HOW TO RUN:
    ```
    You can modify the test commands as you see fit to ensure the code is functioning smoothly.
 
-To test the game_client file, follow these instructions below:
+To test the **game_client** file, follow these instructions below:
 
 1. Open a second VS code terminal, and in your second VS code Terminal, access the client folder with:
    ```

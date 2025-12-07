@@ -211,7 +211,9 @@ Instructions:
 
 Within your conda, environment, or VS code, install the requirements file in the VS code terminal
 in the same terminal with the following command
+```
 pip install -r requirements.txt
+```
 
 
 Note that Online Link where you can view the log

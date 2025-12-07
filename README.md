@@ -274,20 +274,18 @@ HOW TO RUN:
      cd serving
    ```
 2. Then execute the flask initialization command below:
-   '''
+   ```
    python -m waitress --listen=0.0.0.0:5000 app:app
    ```  
 3. Open a second VS code terminal, and in your second VS code Terminal, access the client folder with:
-   '''
+   ```
    cd client
-   '''
-4. Then
-   '''
+   ```
+5. Then
+   ```
    execute: python test_client.py
-   '''
-
+   ```
    You can modify the test commands as you see fit to ensure the code is functioning smoothly. 
-
 
 ## Streamlit
 

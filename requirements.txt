@@ -5,9 +5,9 @@ waitress==2.1.2
 # REQUIRED FOR MODEL LOADING
 numpy==2.0.2
 scikit-learn==1.6.1
-joblib==1.3.2
+joblib==1.5.2
 pandas==2.2.2
 
 # OPTIONAL BUT USED
-wandb==0.15.8
+wandb==0.23.0
 requests==2.31.0

@@ -211,6 +211,26 @@ Instructions:
 
 Within your conda, environment, or VS code, install the requirements file in the VS code terminal
 in the same terminal with the following command
+
+For each of our runs, we created a virtual environment with the code as follows in your VS Code terminal: 
+```
+cd "main folder" in my version it is "C:\Users\Dell\OneDrive\Desktop\UdeM Graduate\Data Science\Milestone3"
+```
+Then run:
+```
+python -m venv serving_env
+```
+
+Then run: 
+```
+serving_env\Scripts\activate
+```
+
+Then run: 
+```
+pip install --upgrade pip
+```
+
 ```
 pip install -r requirements.txt
 ```

@@ -262,6 +262,8 @@ We should expect a probability value returned here
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method POST -ContentType "application/json" -Body '{"angle_from_net":[30]}'
 ```
 
+For the rest of the testing, please complete the rest of the commands in Section 2 Test Script.ps1
+
 ## Streamlit
 
 Streamlit can be installed using:

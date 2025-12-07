@@ -1,4 +1,5 @@
 """
+First make sure you are in the client folder
 You can directly run this file via:
 python test_gclient.py
 """
@@ -7,7 +8,7 @@ from game_client import GameClient
 import time
 
 # Pick any REAL game_id from past seasons
-TEST_GAME_ID = "2023020006"  
+TEST_GAME_ID = "2023020008"  
 
 gclient = GameClient(TEST_GAME_ID)
 

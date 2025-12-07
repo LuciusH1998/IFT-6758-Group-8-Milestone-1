@@ -1,4 +1,9 @@
-## Online Link where you can view the log
+## Within your conda, environment, or VS code, install the requirements file in the VS code terminal
+## in the same terminal with the following command
+pip install -r requirements.txt
+
+
+## Note that Online Link where you can view the log
 Logs Link: 127.0.0.1:5000/logs
 
 Example Test Script:
@@ -9,7 +14,6 @@ Example Test Script:
 ## Note this presumes you run the test on windows, UBUNTU will need CURL commands 
 
 # First access the serving folder with the commands cd serving 
-
 # In the first VS Code Terminal, run line below 
 python -m waitress --listen=0.0.0.0:5000 app:app
 

@@ -526,56 +526,10 @@ Expected output should show successful predictions and model swapping.
 4. Enter Game ID: `2021020329`
 5. Click "Ping Game" - should display game data and predictions
 
-### Docker Architecture
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Docker Compose Network                    │
-│                                                              │
-│  ┌───────────────────────┐    ┌──────────────────────────┐ │
-│  │  Streamlit Container  │    │   Serving Container       │ │
-│  │  (Port 8501)          │◄───┤   (Port 5000)            │ │
-│  │                       │    │                          │ │
-│  │  - Game Client        │    │  - Flask App             │ │
-│  │  - Serving Client     │    │  - Model Loading         │ │
-│  │  - Interactive UI     │    │  - WandB Integration     │ │
-│  └───────────────────────┘    │  - Predictions API       │ │
-│           │                    └──────────────────────────┘ │
-│           │                              │                   │
-│           └────── Service: serving ──────┘                   │
-│                   (Docker Network)                           │
-└─────────────────────────────────────────────────────────────┘
-                    │                    │
-                    │                    │
-                    ▼                    ▼
-            localhost:8501      localhost:5000
-                (Browser)           (Browser/API)
-```
-
 **Key Features:**
 - Containers communicate via Docker network using service names
 - Streamlit uses `http://serving:5000` to connect to Flask
 - Host machine accesses via `localhost:5000` and `localhost:8501`
-
-### Project File Structure
-```
-IFT-6758-Group-8-Milestone-1/
-├── docker-compose.yaml         # Multi-container orchestration
-├── Dockerfile.serving          # Flask service image definition
-├── Dockerfile.streamlit        # Streamlit service image definition
-├── build.sh                    # Build script for both images
-├── run.sh                      # Run script for serving container
-├── requirements.txt            # Python dependencies
-├── serving/
-│   └── app.py                  # Flask application
-├── streamlit_app.py            # Streamlit dashboard
-└── ift6758/
-    └── ift6758/
-        └── client/
-            ├── serving_client.py   # Flask API client
-            ├── game_client.py      # NHL API client
-            ├── test_client.py      # Serving client tests
-            └── test_gclient.py     # Game client tests
-```
 
 ### Environment Variables
 

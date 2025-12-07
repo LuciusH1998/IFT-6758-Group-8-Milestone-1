@@ -271,7 +271,7 @@ To test the serving_client file, follow these instructions below:
 HOW TO RUN:
 1. In VS Code, within your first Terminal, access the serving folder with:
    ```
-     cd serving
+     cd serving or (correct serving path for your downloaded folder)
    ```
 2. Then execute the flask initialization command below:
    ```

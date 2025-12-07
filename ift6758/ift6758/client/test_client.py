@@ -1,10 +1,11 @@
 # HOW TO RUN:
+# First ensure virtual environment/condas/ requirements.txt are all set up or installed. 
 # 1. In Terminal #1:
-#       cd serving
+#       cd serving folder
 #       Then execute: python -m waitress --listen=0.0.0.0:5000 app:app
 #
 # 2. In Terminal #2:
-#       cd client 
+#       cd client folder 
 #       Then execute: python test_client.py
 
 from serving_client import ServingClient
@@ -25,3 +26,4 @@ print(client.predict(df2))
 
 print("Generating Logs ")
 print(client.logs()["logs"])
+

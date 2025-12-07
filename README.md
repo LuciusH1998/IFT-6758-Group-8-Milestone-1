@@ -279,7 +279,7 @@ HOW TO RUN:
    ```  
 3. Open a second VS code terminal, and in your second VS code Terminal, access the client folder with:
    ```
-   cd client
+   cd client (or given client path folder)
    ```
 5. Then
    ```

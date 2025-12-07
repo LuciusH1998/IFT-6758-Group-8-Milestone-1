@@ -262,7 +262,32 @@ We should expect a probability value returned here
 Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method POST -ContentType "application/json" -Body '{"angle_from_net":[30]}'
 ```
 
-For the rest of the testing, please complete the rest of the commands in Section 2 Test Script.ps1
+For the rest of the testing, please complete the rest of the commands in Section 2 Test Script.ps1. Note you can also modify the testing commands as you see fit to ensure everything is working. 
+
+## Testing Serving and Game Client (Section 3)
+
+To test the serving_client file, follow these instructions below:
+
+HOW TO RUN:
+1. In VS Code, within your first Terminal, access the serving folder with:
+   ```
+     cd serving
+   ```
+2. Then execute the flask initialization command below:
+   '''
+   python -m waitress --listen=0.0.0.0:5000 app:app
+   ```  
+3. Open a second VS code terminal, and in your second VS code Terminal, access the client folder with:
+   '''
+   cd client
+   '''
+4. Then
+   '''
+   execute: python test_client.py
+   '''
+
+   You can modify the test commands as you see fit to ensure the code is functioning smoothly. 
+
 
 ## Streamlit
 

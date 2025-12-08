@@ -346,3 +346,9 @@ with st.container():
         fig = plot_team_shot_heatmap(df, team_name=st.session_state["teams"][1], id_col="eventId")
         st.plotly_chart(fig, use_container_width=True)
 
+with st.container():
+    if st.session_state.get("eventID") is not None:
+        st.write("Added elements for section 7:\n" \
+        "- Team logos\n" \
+        "- Shots on goals, blocked shots, missed shots and penalties\n" \
+        "- Shot heatmaps")

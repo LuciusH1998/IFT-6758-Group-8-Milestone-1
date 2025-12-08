@@ -67,7 +67,6 @@ requirements.txt — Lists all Python dependencies required for the environment.
 .gitignore — Specifies files and folders excluded from version control.
 
 run.sh — Helper script for executing parts of the project.
-<img width="880" height="1937" alt="image" src="https://github.com/user-attachments/assets/c3d4d7ec-453e-4e8a-8394-ccc4169772ca" />
 
 ## Installation
 

@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from client.game_client import GameClient
+from ift6758.client.game_client import GameClient
 import os
 import numpy as np
 import pandas as pd
@@ -145,7 +145,7 @@ with st.container():
 
         col1, col2 = st.columns(2)
         with col1:
-            st.image(data.iloc[0]["homeTeamLogo"]) # setting width='content' or it's default value does not seem to work
+            st.image(data.iloc[0]["homeTeamLogo"], width="stretch") # setting width='content' or it's default value does not seem to work
             xG_home = data.loc[data["details.eventOwnerTeamId"] == st.session_state["homeTeamId"]]["model_predictions"].sum().round(2)
             goals_home = data.loc[data["details.eventOwnerTeamId"] == st.session_state["homeTeamId"]]["is_goal"].sum()
             st.metric(f"{st.session_state['teams'][0]} xG (actual)", f"{xG_home} ({goals_home})", str((xG_home-goals_home).round(2)), delta_color="off")
@@ -155,7 +155,7 @@ with st.container():
             st.write(f"Penalties: {data.loc[data['details.eventOwnerTeamId'] == st.session_state['homeTeamId']]['typeDescKey'].value_counts()['penalty'] if 'penalty' in data.loc[data['details.eventOwnerTeamId'] == st.session_state['homeTeamId']]['typeDescKey'].value_counts().keys() else 0}")
 
         with col2:
-            st.image(data.iloc[0]["awayTeamLogo"])
+            st.image(data.iloc[0]["awayTeamLogo"], width="stretch")
             xG_away = data.loc[data["details.eventOwnerTeamId"] == st.session_state["awayTeamId"]]["model_predictions"].sum().round(2)
             goals_away = data.loc[data["details.eventOwnerTeamId"] == st.session_state["awayTeamId"]]["is_goal"].sum()
             st.metric(f"{st.session_state['teams'][1]} xG (actual)", f"{xG_away} ({goals_away})", str((xG_away-goals_away).round(2)), delta_color="off")

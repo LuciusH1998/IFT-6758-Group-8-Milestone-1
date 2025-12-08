@@ -236,6 +236,9 @@ pip install docker-compose
 You can then simply do `docker-compose up` to build and run the application that you sepcified in
 the `docker-compose.yaml` file.
 
+## Generating New API (Section 1)
+
+Generating this new API was already completed in Milestone 1 and 2. It is implicitly used in the Flask app, streamlit, and docker. 
 
 ## Flask App (Section 2)
 

@@ -386,6 +386,19 @@ This consists of the expected goals along with some other statistics, the predic
 
 The application has been structured in a robust manner and can handle various cases and orders of inputting the data.
 
+In order to run the streamlit section separately, after activating the virtual envirement and running 
+```bash
+pip install -r requirements.txt
+```
+in the `streamlit_app.py`, cd into `serving` and run 
+```bash
+python -m waitress --listen=0.0.0.0:5000 app:app
+```
+Then open a separate terminal with the virtual environment activated and in the `streamlit_app.py` directory, run
+```bash
+streamlit run streamlit_app.py
+```
+
 ## Docker Deployment (Tasks 4 & 6 - Milestone 3)
 
 This project includes a complete Dockerized deployment system with two containerized services:

@@ -5,6 +5,8 @@ This readme explains how to implement Milestone3 in terms of implementing the fl
 Note the WANDB API KEY you can use for this milestone is: 
 **50c6486ca894b323e5061c4513b477036ac87f8a**
 
+Note, the project was run with Python version **3.13.3**, so you likely need this version or higher to ensure that the **.py** files run smoothly on your laptop if you want to run them without the **Docker**. 
+
 ## Repo Structure 
 
 ### figures 

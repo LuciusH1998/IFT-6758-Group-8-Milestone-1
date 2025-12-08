@@ -380,7 +380,7 @@ To test the **game_client** file, follow these instructions below:
    
 ## Streamlit (Sections 5 & 7)
 
-After enternig the workspace, model name, model version, the model can be downloaded from WandB. When the game ID is given and the `Ping game` button is pressed, it would be possible to select the `event ID`, after which the match data will displayed. 
+After entering the workspace, model name, model version, the model can be downloaded from WandB. When the game ID is given and the `Ping game` button is pressed, it would be possible to select the `event ID`, after which the match data will be displayed. 
 
 This consists of the expected goals along with some other statistics, the predictions and the data used upto the chosen event. The shot heatmaps of both teams for the entire match are also shown.
 

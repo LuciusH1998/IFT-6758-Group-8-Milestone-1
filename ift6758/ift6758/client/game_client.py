@@ -184,7 +184,14 @@ class GameClient:
 
         unseen["homeTeamName"] = home_name
         unseen["awayTeamName"] = away_name
-        
+
+        # Attach home/away team logos
+        home_logo = data.get("homeTeam", {}).get("logo", None)
+        away_logo = data.get("awayTeam", {}).get("logo", None)
+
+        unseen["homeTeamLogo"] = home_logo
+        unseen["awayTeamLogo"] = away_logo
+
         # Creating the necessary features 
         processed = self.process_events(unseen)
         return processed

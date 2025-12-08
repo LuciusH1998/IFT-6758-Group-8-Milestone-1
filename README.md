@@ -280,15 +280,11 @@ Then run:
 serving_env\Scripts\activate
 ```
 
-Then run: 
-```
-pip install --upgrade pip
-```
+Then run:
 
 ```
 pip install -r requirements.txt
 ```
-
 
 Note that Online Link where you can view the log
 Logs Link: 127.0.0.1:5000/logs

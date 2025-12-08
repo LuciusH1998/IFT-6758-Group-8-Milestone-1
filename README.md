@@ -344,6 +344,504 @@ The above command should start the app and give the IP/port where it is running.
 
 To make changes to the app, simply change the `streamlit_app.py` script and reload the webpage to see the changes!
 
+## Docker Deployment (Tasks 4 & 6 - Milestone 3)
+
+This project includes a complete Dockerized deployment system with two containerized services:
+- **Flask Serving Service** (Port 5000): Model serving API with hot-swapping capabilities
+- **Streamlit Dashboard** (Port 8501): Interactive web interface for predictions
+
+### Prerequisites
+
+1. **Install Docker Desktop**: Follow instructions at https://docs.docker.com/get-docker/
+2. **WandB API Key**: You will need your WandB API key to download models
+
+### Quick Start Guide
+
+#### Step 1: Set WandB API Key
+
+**Before running Docker**, set your WandB API key in the terminal:
+
+**Windows PowerShell:**
+```powershell
+$env:WANDB_API_KEY="your-wandb-api-key-here"
+```
+
+**Linux/Mac/Git Bash:**
+```bash
+export WANDB_API_KEY="your-wandb-api-key-here"
+```
+
+**Verify it's set:**
+```powershell
+# Windows
+echo $env:WANDB_API_KEY
+
+# Linux/Mac
+echo $WANDB_API_KEY
+```
+
+#### Step 2: Build and Run
+
+From the project root directory, run:
+```bash
+docker-compose up --build
+```
+
+This single command will:
+- Build both Docker images (serving and streamlit)
+- Start the Flask serving container on port 5000
+- Start the Streamlit dashboard on port 8501
+- Configure networking between containers
+
+**To run in background (detached mode):**
+```bash
+docker-compose up --build -d
+```
+
+#### Step 3: Access Services
+
+Once containers are running:
+- **Flask API Logs**: http://localhost:5000/logs
+- **Streamlit Dashboard**: http://localhost:8501
+
+**Important**: Use `localhost` NOT `0.0.0.0` in your browser!
+
+### Docker Services Overview
+
+#### Flask Serving Service (Port 5000)
+
+The serving service provides three REST API endpoints:
+
+**1. `/predict` (POST)** - Make goal probability predictions
+```powershell
+# Windows PowerShell
+$testData = @{distance_from_net = @(50, 60, 70)} | ConvertTo-Json
+Invoke-RestMethod -Uri http://localhost:5000/predict -Method Post -Body $testData -ContentType "application/json"
+```
+```bash
+# Linux/Mac
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"distance_from_net": [50, 60, 70]}'
+```
+
+**2. `/logs` (GET)** - View application logs
+```powershell
+# Windows
+Invoke-WebRequest -Uri http://localhost:5000/logs
+
+# Linux/Mac
+curl http://localhost:5000/logs
+```
+
+**3. `/download_registry_model` (POST)** - Download and hot-swap models
+```powershell
+# Windows
+$model = @{model = "logreg_distance_angle"; version = "v0"} | ConvertTo-Json
+Invoke-RestMethod -Uri http://localhost:5000/download_registry_model -Method Post -Body $model -ContentType "application/json"
+
+# Linux/Mac
+curl -X POST http://localhost:5000/download_registry_model \
+  -H "Content-Type: application/json" \
+  -d '{"model": "logreg_distance_angle", "version": "v0"}'
+```
+
+#### Streamlit Dashboard (Port 8501)
+
+Interactive web dashboard providing:
+- Model selection and downloading from WandB
+- Game ID input for NHL games
+- Real-time predictions display
+- Expected goals (xG) calculations
+- Shot events data visualization
+
+Access at: http://localhost:8501
+
+### Alternative: Manual Build and Run
+
+#### Build Images Using Scripts
+
+**Build both images:**
+```bash
+# Make script executable (Linux/Mac)
+chmod +x build.sh
+
+# Run build script
+./build.sh
+```
+
+**Or build manually:**
+```bash
+# Build serving image
+docker build -t ift6758/serving:latest -f Dockerfile.serving .
+
+# Build streamlit image
+docker build -t ift6758/streamlit:latest -f Dockerfile.streamlit .
+```
+
+#### Run Individual Containers
+
+**Important**: Set WANDB_API_KEY first!
+
+**Run serving container:**
+```bash
+# Make script executable (Linux/Mac)
+chmod +x run.sh
+
+# Run script
+./run.sh
+```
+
+**Or run manually:**
+```bash
+# Windows PowerShell
+docker run -p 5000:5000 -e WANDB_API_KEY=$env:WANDB_API_KEY ift6758/serving:latest
+
+# Linux/Mac
+docker run -p 5000:5000 -e WANDB_API_KEY=${WANDB_API_KEY} ift6758/serving:latest
+```
+
+**Run streamlit container:**
+```bash
+# Windows PowerShell
+docker run -p 8501:8501 -e WANDB_API_KEY=$env:WANDB_API_KEY ift6758/streamlit:latest
+
+# Linux/Mac
+docker run -p 8501:8501 -e WANDB_API_KEY=${WANDB_API_KEY} ift6758/streamlit:latest
+```
+
+**Note**: When running containers individually, they cannot communicate with each other. Use `docker-compose` for full functionality.
+
+### Docker Commands Reference
+
+#### View Running Containers
+```bash
+docker ps
+```
+
+Expected output:
+```
+CONTAINER ID   IMAGE                      PORTS                    NAMES
+abc123...      ift6758/serving:latest     0.0.0.0:5000->5000/tcp   ift6758-serving
+def456...      ift6758/streamlit:latest   0.0.0.0:8501->8501/tcp   ift6758-streamlit
+```
+
+#### View Container Logs
+```bash
+# View serving logs
+docker logs ift6758-serving
+
+# View streamlit logs
+docker logs ift6758-streamlit
+
+# Follow logs in real-time
+docker logs -f ift6758-serving
+```
+
+#### Stop Containers
+```bash
+# Stop all services
+docker-compose down
+
+# Stop specific service
+docker-compose stop serving
+```
+
+#### Restart Services
+```bash
+# Restart all services
+docker-compose restart
+
+# Restart specific service
+docker-compose restart serving
+```
+
+#### Rebuild After Code Changes
+```bash
+# Rebuild and restart
+docker-compose up --build
+
+# Rebuild without cache (clean build)
+docker-compose build --no-cache
+docker-compose up
+```
+
+### Testing the Docker Deployment
+
+#### Test 1: Flask Endpoints
+
+**Test logs endpoint:**
+```powershell
+# Windows
+Invoke-WebRequest -Uri http://localhost:5000/logs
+```
+```bash
+# Linux/Mac
+curl http://localhost:5000/logs
+```
+
+Should show successful model loading in logs.
+
+**Test prediction endpoint:**
+```powershell
+# Windows
+$testData = @{distance_from_net = @(50, 60, 70)} | ConvertTo-Json
+Invoke-RestMethod -Uri http://localhost:5000/predict -Method Post -Body $testData -ContentType "application/json"
+```
+```bash
+# Linux/Mac
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"distance_from_net": [50, 60, 70]}'
+```
+
+Should return prediction probabilities.
+
+**Test model download:**
+```powershell
+# Windows
+$modelRequest = @{model = "logreg_angle"; version = "latest"} | ConvertTo-Json
+Invoke-RestMethod -Uri http://localhost:5000/download_registry_model -Method Post -Body $modelRequest -ContentType "application/json"
+```
+```bash
+# Linux/Mac
+curl -X POST http://localhost:5000/download_registry_model \
+  -H "Content-Type: application/json" \
+  -d '{"model": "logreg_angle", "version": "latest"}'
+```
+
+Should confirm successful model download.
+
+#### Test 2: Client Integration
+
+Ensure Docker containers are running:
+```bash
+docker-compose up -d
+```
+
+Navigate to client directory and run tests:
+```bash
+cd ift6758/ift6758/client
+python test_client.py
+```
+
+Expected output should show successful predictions and model swapping.
+
+#### Test 3: Streamlit Dashboard
+
+1. Open browser to: http://localhost:8501
+2. In sidebar, enter model details:
+   - Workspace: `IFT6758-2025-B08`
+   - Model Name: `logreg_distance`
+   - Version: `v8`
+3. Click "Download Model" - should see success message
+4. Enter Game ID: `2021020329`
+5. Click "Ping Game" - should display game data and predictions
+
+**Key Features:**
+- Containers communicate via Docker network using service names
+- Streamlit uses `http://serving:5000` to connect to Flask
+- Host machine accesses via `localhost:5000` and `localhost:8501`
+
+### Environment Variables
+
+| Variable | Required | Description | How to Set |
+|----------|----------|-------------|------------|
+| `WANDB_API_KEY` | Yes | WandB API key for model registry | Set in terminal before running docker-compose |
+
+**Setting the API key:**
+```powershell
+# Windows PowerShell (valid for current session)
+$env:WANDB_API_KEY="your-key-here"
+
+# Linux/Mac (valid for current session)
+export WANDB_API_KEY="your-key-here"
+```
+
+**Note**: The API key must be set in the terminal each time you open a new session.
+
+### Troubleshooting
+
+#### Issue: "WANDB_API_KEY variable is not set"
+
+**Cause**: Environment variable not set before running docker-compose.
+
+**Solution**: 
+```powershell
+# Windows
+$env:WANDB_API_KEY="your-wandb-api-key"
+
+# Linux/Mac
+export WANDB_API_KEY="your-wandb-api-key"
+
+# Then run
+docker-compose up
+```
+
+#### Issue: "Port 5000 already in use"
+
+**Cause**: Another application is using port 5000.
+
+**Solution 1**: Stop the conflicting application
+```powershell
+# Windows - Find process using port
+netstat -ano | findstr :5000
+# Kill the process (replace PID with actual number)
+taskkill /PID <PID> /F
+
+# Linux/Mac
+lsof -i :5000
+kill -9 <PID>
+```
+
+**Solution 2**: Change port in `docker-compose.yaml`
+```yaml
+ports:
+  - "5001:5000"  # Use port 5001 instead
+```
+
+#### Issue: "Cannot reach http://0.0.0.0:8501/"
+
+**Cause**: Using wrong URL in browser.
+
+**Solution**: Use `http://localhost:8501` NOT `http://0.0.0.0:8501`
+
+#### Issue: "Streamlit cannot connect to serving"
+
+**Cause**: Incorrect IP address in `streamlit_app.py`.
+
+**Solution**: Ensure `streamlit_app.py` uses Docker service name:
+```python
+# Correct - uses Docker service name
+client = ServingClient(ip="serving", port=5000)
+
+# Wrong - will not work inside Docker
+client = ServingClient(ip="localhost", port=5000)
+```
+
+#### Issue: Container crashes immediately
+
+**Cause**: Various (syntax errors, missing files, import errors).
+
+**Solution**: Check container logs:
+```bash
+docker logs ift6758-serving
+docker logs ift6758-streamlit
+```
+
+Look for error messages and fix accordingly.
+
+#### Issue: "Model failed to load"
+
+**Possible causes:**
+1. WANDB_API_KEY not set or incorrect
+2. Model doesn't exist in WandB registry
+3. Network connection issues
+
+**Solution**: 
+1. Verify API key is correct
+2. Check model exists in WandB workspace
+3. View detailed logs: `docker logs ift6758-serving`
+
+#### Issue: "NumPy version mismatch" (local testing only)
+
+**Cause**: Local Python has NumPy 2.x but pandas requires 1.x.
+
+**Solution**: This only affects local testing, not Docker. Fix with:
+```bash
+pip install "numpy<2"
+```
+
+### Clean Up Docker Resources
+
+**Remove stopped containers:**
+```bash
+docker-compose down
+```
+
+**Remove images:**
+```bash
+docker rmi ift6758/serving:latest
+docker rmi ift6758/streamlit:latest
+```
+
+**Remove all unused Docker resources:**
+```bash
+docker system prune -a
+```
+
+**Warning**: This removes all stopped containers, unused networks, dangling images, and build cache.
+
+### Development Workflow
+
+1. **Make code changes** to `serving/app.py` or `streamlit_app.py`
+2. **Rebuild containers**: 
+```bash
+   docker-compose down
+   docker-compose up --build
+```
+3. **Test changes**: 
+   - Flask: http://localhost:5000/logs
+   - Streamlit: http://localhost:8501
+4. **Check logs for errors**: 
+```bash
+   docker logs -f ift6758-serving
+   docker logs -f ift6758-streamlit
+```
+5. **Iterate**: Repeat steps 1-4 as needed
+
+### Complete Test Workflow
+
+**Step-by-step testing procedure:**
+```bash
+# 1. Set API key
+export WANDB_API_KEY="your-key"  # or $env:WANDB_API_KEY on Windows
+
+# 2. Clean previous builds
+docker-compose down
+docker system prune -f
+
+# 3. Build and start
+docker-compose up --build
+
+# 4. Wait 30 seconds for startup
+# (Open new terminal for testing)
+
+# 5. Test Flask logs
+curl http://localhost:5000/logs
+
+# 6. Test Flask prediction
+curl -X POST http://localhost:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"distance_from_net": [50]}'
+
+# 7. Test Streamlit
+# Open browser to http://localhost:8501
+
+# 8. Test client integration
+cd ift6758/ift6758/client
+python test_client.py
+
+# 9. Check everything passed
+# If all tests pass, deployment is successful!
+```
+
+### Additional Resources
+
+- [Docker Official Documentation](https://docs.docker.com/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [WandB Python SDK](https://docs.wandb.ai/ref/python)
+
+### Notes
+
+- Docker containers are isolated environments - changes to local files won't affect running containers until you rebuild
+- Always set WANDB_API_KEY before running docker-compose
+- Use `localhost` (not `0.0.0.0`) when accessing services from your browser
+- Inside Docker containers, services communicate using service names (e.g., `http://serving:5000`)
+- Check logs regularly for debugging: `docker logs -f <container-name>`
+
 
 ## Environments
 

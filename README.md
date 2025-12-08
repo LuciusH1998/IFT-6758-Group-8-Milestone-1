@@ -378,23 +378,13 @@ To test the **game_client** file, follow these instructions below:
 
    Once you are finished with the testing, you can press control +c in the vs code which is running the flask app. 
    
-## Streamlit
+## Streamlit (Sections 5 & 7)
 
-Streamlit can be installed using:
-```Bash
-pip install streamlit
-```
+After enternig the workspace, model name, model version, the model can be downloaded from WandB. When the game ID is given and the `Ping game` button is pressed, it would be possible to select the `event ID`, after which the match data will displayed. 
 
-A template streamlit app is provided in `streamlit_app.py`. Feel free to deviate from the template (especially if going for the bonus).
+This consists of the expected goals along with some other statistics, the predictions and the data used upto the chosen event. The shot heatmaps of both teams for the entire match are also shown.
 
-Once you've setup your environment, your Streamlit app can be run using:
-```Bash
-streamlit run streamlit_app.py
-```
-
-The above command should start the app and give the IP/port where it is running. Custom IP/ports can be specified using the `--server.address IP` and `--server.port PORT` flags respectively. Additional flags can be found [here](https://docs.streamlit.io/library/advanced-features/cli).
-
-To make changes to the app, simply change the `streamlit_app.py` script and reload the webpage to see the changes!
+The application has been structured in a robust manner and can handle various cases and orders of inputting the data.
 
 ## Docker Deployment (Tasks 4 & 6 - Milestone 3)
 

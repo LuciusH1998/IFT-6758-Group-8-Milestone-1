@@ -2,7 +2,7 @@
 
 This readme explains how to implement Milestone3 in terms of implementing the flask app, docker files, and streamlit_app to generate quick predictions of our NHL data produced from Milestone 1 and Milestone 2. The immediate section below explains the repository folder structure. 
 
-Note the WANDB API KEY you can use for this repo is: 
+Note the WANDB API KEY you can use for this milestone is: 
 **50c6486ca894b323e5061c4513b477036ac87f8a**
 
 ## Repo Structure 

@@ -7,7 +7,7 @@ Note the WANDB API KEY you can use for this milestone is:
 
 Note, the project was run with Python version **3.13.3**, so you likely need this version to ensure that the **.py** files run smoothly on your laptop if you want to run them without the **Docker**. 
 
-After running the docker commands, the terminal will print the link: `http://0.0.0.0:8501`, which will not work. Please use the following link: `http://localhost:8501`.
+After running the docker commands, the terminal will print the link: `http://0.0.0.0:8501`, **which will not work**. Please use the following link: `http://localhost:8501`.
 
 ## Repo Structure 
 

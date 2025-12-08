@@ -7,6 +7,8 @@ Note the WANDB API KEY you can use for this milestone is:
 
 Note, the project was run with Python version **3.13.3**, so you likely need this version to ensure that the **.py** files run smoothly on your laptop if you want to run them without the **Docker**. 
 
+After running the docker commands, the terminal will print the link: `http://0.0.0.0:8501`, which will not work. Please use the following link: `http://localhost:8501`.
+
 ## Repo Structure 
 
 ### figures 
@@ -386,19 +388,6 @@ After entering the workspace, model name, model version, the model can be downlo
 This consists of the expected goals along with some other statistics, the predictions and the data used upto the chosen event. The shot heatmaps of both teams for the entire match are also shown.
 
 The application has been structured in a robust manner and can handle various cases and orders of inputting the data.
-
-In order to run the streamlit section separately, after activating the virtual envirement and running 
-```bash
-pip install -r requirements.txt
-```
-in the `streamlit_app.py` directory, cd into the `serving` folder and run 
-```bash
-python -m waitress --listen=0.0.0.0:5000 app:app
-```
-Then open a separate terminal with the virtual environment activated and in the `streamlit_app.py` directory, run
-```bash
-streamlit run streamlit_app.py
-```
 
 ## Docker Deployment (Tasks 4 & 6 - Milestone 3)
 

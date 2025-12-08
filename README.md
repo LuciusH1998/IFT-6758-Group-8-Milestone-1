@@ -1,20 +1,73 @@
-# IFT6758 milestone 3
+# Milestone 3 Repo Overview 
 
-This template provides you with a skeleton of a Python package that can be installed into your local machine.
-This allows you access your code from anywhere on your system if you've activated the environment the package was installed to.
-You are encouraged to leverage this package as a skeleton and add all of your reusable code, functions, etc. into relevant modules.
-This makes collaboration much easier as the package could be seen as a "single source of truth" to pull data, create visualizations, etc. rather than relying on a jumble of notebooks.
-You can still run into trouble if branches are not frequently merged as work progresses, so try to not let your branches diverge too much!
+This readme explains how to implement Milestone3 in terms of implementing the flask app, docker files, and streamlit_app to generate quick predictions of our NHL data produced from Milestone 1 and Milestone 2. The immediate section below explains the repository folder structure. 
 
-Also included in this repo is an image of the NHL ice rink that you can use in your plots.
-It has the correct location of lines, faceoff dots, and length/width ratio as the real NHL rink.
-Note that the rink is 200 feet long and 85 feet wide, with the goal line 11 feet from the nearest edge of the rink, and the blue line 75 feet from the nearest edge of the rink.
+Note the WANDB API KEY you can use for this repo is: 
+**50c6486ca894b323e5061c4513b477036ac87f8a**
 
-<p align="center">
-<img src="./figures/nhl_rink.png" alt="NHL Rink is 200ft x 85ft." width="400"/>
-<p>
+## Repo Structure 
 
-The image can be found in [`./figures/nhl_rink.png`](./figures/nhl_rink.png).
+### figures 
+Contains supporting images and data used in section 5 and 7.  
+
+### ift6758/client/
+
+Contains all files for **Section 3**: Game Client & Serving Client.
+
+game_client.py — Retrieves NHL game data and preprocesses events.
+
+test_client.py — Unit tests for the game client.
+
+serving_client.py — Client used to send requests to the Flask model server.
+
+test_sclient.py — Tests for the serving client.
+
+This directory supports data retrieval and service interaction for Section 3.
+
+### images/
+
+Contains static assets (e.g., rink diagrams, graphics) used by notebooks and Streamlit.
+
+### notebooks/
+
+Includes exploratory notebooks used during analysis and debugging.
+
+### serving/
+
+Contains all files related to **Section 2**: Model Serving.
+
+app.py — Main Flask application that loads models and exposes prediction endpoints.
+
+Section 2 Test Script.ps1 — PowerShell script used to test the Flask API locally.
+
+These files implement and validate the serving pipeline for Section 2.
+
+###  Docker & Deployment Files
+
+Used for Section 4 and Section 6 (containerization and deployment).
+
+Dockerfile.serving — Builds the Docker image for the Flask inference server.
+
+Dockerfile.streamlit — Builds the Docker image for the Streamlit app.
+
+docker-compose.yaml — Orchestrates multi-service deployments (Flask + Streamlit).
+
+build.sh — Script to build Docker images.
+
+### streamlit_app.py
+
+Implements the UI for Section 5 and Section 7.
+
+Launches the Streamlit interface used for visualization and interactive predictions.
+
+### Other Key Files
+
+requirements.txt — Lists all Python dependencies required for the environment.
+
+.gitignore — Specifies files and folders excluded from version control.
+
+run.sh — Helper script for executing parts of the project.
+<img width="880" height="1937" alt="image" src="https://github.com/user-attachments/assets/c3d4d7ec-453e-4e8a-8394-ccc4169772ca" />
 
 ## Installation
 

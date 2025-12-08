@@ -390,7 +390,7 @@ In order to run the streamlit section separately, after activating the virtual e
 ```bash
 pip install -r requirements.txt
 ```
-in the `streamlit_app.py`, cd into `serving` and run 
+in the `streamlit_app.py` directory, cd into the `serving` folder and run 
 ```bash
 python -m waitress --listen=0.0.0.0:5000 app:app
 ```
